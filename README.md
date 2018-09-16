@@ -1,21 +1,29 @@
 # wuancake_webapp
 
-> A Vue.js project
+> 这是一个 Lavas PWA 项目
 
-## Build Setup
+## npm 相关命令
 
 ``` bash
-# install dependencies
+# 安装工程依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 在本地启动调试 server
 npm run dev
 
-# build for production with minification
+# 构建线上生产环境产物
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# 启动编译后的代码，注意，需要在 dist 目录中启动，仅 SSR 模式下有效
+npm run start
+
+# 检查代码是否符合规范
+npm run lint
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Lavas 工程模版基于 [vue-template-vue](https://github.com/lavas-project/lavas-template-vue/) 模版的 `release-*` 分支创建。
+如果想要了解具体如何玩转整个 Lavas 创建的 PWA 工程, 请查看[Lavas 官网教程](https://lavas.baidu.com/guide)。
+
+## Changelog
+
+详细的 Changelog 请看 [Release Notes](https://github.com/lavas-project/lavas-template-vue/releases)
