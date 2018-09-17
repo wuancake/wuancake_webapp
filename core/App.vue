@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <wuan-cake-header>标题</wuan-cake-header>
         <transition
             :name="pageTransitionEffect"
             @before-enter="handleBeforeEnter"
@@ -23,13 +24,15 @@ import Vue from 'vue';
 import {mapState, mapActions} from 'vuex';
 import UpdateToast from '@/components/UpdateToast';
 import {keepAlivePages} from '@/.lavas/router';
+import WuanCakeHeader from '@/components/WuanCakeHeader'
 
 const ENABLE_SCROLL_CLASS = 'app-view-scroll-enabled';
 
 export default {
     name: 'app',
     components: {
-        UpdateToast
+        UpdateToast,
+        WuanCakeHeader
     },
     computed: {
         ...mapState('pageTransition', {

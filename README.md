@@ -27,3 +27,19 @@ Lavas 工程模版基于 [vue-template-vue](https://github.com/lavas-project/lav
 ## Changelog
 
 详细的 Changelog 请看 [Release Notes](https://github.com/lavas-project/lavas-template-vue/releases)
+
+## 组件使用说明
+
+WuanCakeHeader
+
+``` html
+// 基本用法
+<wuan-cake-header>标题</wuan-cake-header>
+
+// 自定义
+<wuan-cake-header>
+  <div slot="left"></div>
+  <div></div>
+  <div slot="right"></div>
+</wuan-cake-header>
+```
