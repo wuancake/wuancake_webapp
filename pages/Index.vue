@@ -52,7 +52,4 @@ export default {
         font-size 46px
         font-weight 500
         margin-bottom 0
-
-.index_icon
-    color red
 </style>

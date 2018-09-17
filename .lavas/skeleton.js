@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-import Skeleton from 'F:\\mywork\\wuancake_webapp\\core\\Skeleton.vue';
+import Skeleton from 'D:\\CODE\\wuancake_webapp\\core\\Skeleton.vue';
 
 
 export default new Vue({

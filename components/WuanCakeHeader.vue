@@ -32,13 +32,14 @@ export default {
 .wuan_cake_header
   width 100%
   height 100px
-  background #66cccc
-  font-size 16px
+  background #2f94ff
+  font-size 38px
   color #fff
   display flex
   align-items center
   position absolute
   z-index 9999
+  box-shadow 1px 2px 3px rgba(74, 161, 255, 0.84)
   .wuan_cake_header_title
     flex 1
     text-align center

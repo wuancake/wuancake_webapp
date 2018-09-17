@@ -22,6 +22,8 @@ module.exports = {
                 src: 'package.json'
             }
         ],
+        cssMinimize: true, // 是否对css进行压缩
+        cssSourceMap: true, // 是否生成source-map文件
         extendWithWebpackChain(config, {
             type,
             env
