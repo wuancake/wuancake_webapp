@@ -1,13 +1,13 @@
 <template>
   <div aspectratio w-750-100>
     <div class="wuan_cake_header" aspectratio-content>
-      <div>
+      <div @click="tapLeft">
         <slot name="left"></slot>
       </div>
-      <div class="wuan_cake_header_title">
-        <slot></slot>
+      <div @click="tapTitle" class="wuan_cake_header_title">
+        <slot>{{ title }}</slot>
       </div>
-      <div>
+      <div @click="tapRight">
         <slot name="right"></slot>
       </div>
     </div>
@@ -16,9 +16,25 @@
 
 <script>
 export default {
+  props: {
+    title: {
+      type: String
+    }
+  },
   data () {
     return {
       
+    }
+  },
+  methods: {
+    tapLeft () {
+      this.$emit('on-click-left')
+    },
+    tapRight () {
+      this.$emit('on-click-right')
+    },
+    tapTitle () {
+      this.$emit('on-click-title')
     }
   }
 }

@@ -28,18 +28,47 @@ Lavas 工程模版基于 [vue-template-vue](https://github.com/lavas-project/lav
 
 详细的 Changelog 请看 [Release Notes](https://github.com/lavas-project/lavas-template-vue/releases)
 
+## 组件书写规范
+
+- 每个组件必须进行长宽比处理，尺寸以UI图为准。
+- 组件应包含属性（props），插槽（slot），事件（events）
+- 组件使用说明必须注明 属性（props），插槽（slot），事件（events）
+- 注：组件命名以 W... 开头，事件名格式 on-...
+
 ## 组件使用说明
 
-WuanCakeHeader
+组件所有使用说明在 /components_md
+
+### WHeader
+
+props
+
+- title 标题
+
+events
+
+- on-click-left 点击左侧区域触发
+- on-click-title 点击标题区域触发
+- on-click-right 点击右侧区域触发
+
+slot
+
+- left 左侧区域
+- right 右侧区域
+- default 标题区域
 
 ``` html
 // 基本用法
-<wuan-cake-header>标题</wuan-cake-header>
+<w-header>标题</w-header>
+<w-header title="标题"></w-header>
+
+// 事件
+<w-header @on-click-left="your function name">标题</w-header>
 
 // 自定义
-<wuan-cake-header>
+<w-header>
   <div slot="left"></div>
   <div></div>
   <div slot="right"></div>
-</wuan-cake-header>
+</w-header>
 ```
