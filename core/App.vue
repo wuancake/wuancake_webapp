@@ -159,6 +159,7 @@ width: 750px;
     height 100%
 
     .app-view
+        margin-top 100px
         position absolute
         top 0
         right 0
