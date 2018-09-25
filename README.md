@@ -72,3 +72,14 @@ slot
   <div slot="right"></div>
 </w-header>
 ```
+
+## 目录规范
+
+- 所有的页面都放在 /pages 目录下，首字母大写，如 Index.vue
+- 所有页面的子页面放在父页面的目录中。如 Index.vue 页面的子页面放在 /pages/index 的目录中。
+- 所有页面中需要用到的组件，放在 /components 目录下，自行分组到不同目录。
+参考：[Lavas 基础教程 - 基本功能](https://lavas.baidu.com/guide/v2/basic/init)
+
+## 建议
+
+git 代码更新后，重新 lavas dev 一下，因为 router.js 、config.js 、skeleton.js 是 lavas 自动更新的，每个人的会不一样。

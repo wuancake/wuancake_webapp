@@ -1,5 +1,5 @@
 {
-    "buildVersion": 1537194597602,
+    "buildVersion": 1537859026051,
     "build": {
         "ssr": false,
         "publicPath": "/",
@@ -26,7 +26,7 @@
     },
     "serviceWorker": {
         "enable": true,
-        "swDest": "D:\\CODE\\wuancake_webapp\\dist\\service-worker.js"
+        "swDest": "F:\\mywork\\wuancake_webapp\\dist\\service-worker.js"
     },
     "skeleton": {
         "enable": true,

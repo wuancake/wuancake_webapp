@@ -31,7 +31,8 @@
         "postcss-px-to-viewport": "0.0.3",
         "postcss-url": "^8.0.0",
         "postcss-viewport-units": "^0.1.4",
-        "postcss-write-svg": "^3.0.1"
+        "postcss-write-svg": "^3.0.1",
+        "vue2-animate": "^2.1.0"
     },
     "devDependencies": {
         "autoprefixer": "^7.2.5",
