@@ -1,10 +1,11 @@
 <template>
-    <button>
+    <button :class="classes">
         <span><slot></slot></span>
     </button>
 </template>
 
 <script>
+const beseCls = 'w-btn'
 export default {
     props: {
         type: {
@@ -26,10 +27,25 @@ export default {
         return {
             
         }
+    },
+    computed: {
+        classes () {
+            return [
+                `${beseCls}`,
+                `${beseCls}-${this.type}`,
+                {
+                    [`${beseCls}-${this.size}`]: this.size !== 'defautl'
+                }
+            ]
+        }
     }
 }
 </script>
 
 <style lang="stylus" scoped>
-
+.w-btn {
+    border 1px solid #000000
+    box-sizing border-box
+    outline none
+}
 </style>
