@@ -80,6 +80,10 @@ slot
 - 所有页面中需要用到的组件，放在 /components 目录下，自行分组到不同目录。
 参考：[Lavas 基础教程 - 基本功能](https://lavas.baidu.com/guide/v2/basic/init)
 
+## 页面动画效果
+
+页面过渡和动画使用 vue 的 transition 组件结合 animate.css。使用方式参考[vue2-animate](https://github.com/asika32764/vue2-animate)、[vue2使用animate css](https://blog.csdn.net/qq_25804071/article/details/70911421)
+
 ## 建议
 
 git 代码更新后，重新 lavas dev 一下，因为 router.js 、config.js 、skeleton.js 是 lavas 自动更新的，每个人的会不一样。
