@@ -4,11 +4,15 @@
         <h4>[ˈlɑ:vəz]</h4>
         <button @click="query">fetch</button>
         <i class="iconfont">&#xe62b;</i>
+        <div>
+            <w-button>按钮</w-button>
+        </div>
     </div>
 </template>
 
 <script>
 import { getGroupList } from '../api/group.js'
+import WButton from '../components/WButton'
 function setState(store) {}
 
 export default {
@@ -23,6 +27,9 @@ export default {
     },
     async asyncData({store, route}) {
         setState(store);
+    },
+    components: {
+        WButton
     },
     data () {
         return {}
