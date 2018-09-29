@@ -4,8 +4,17 @@
         <h4>[ˈlɑ:vəz]</h4>
         <button @click="query">fetch</button>
         <i class="iconfont">&#xe62b;</i>
-        <div>
+        <div class="btn-box">
+            <label class="box-title">按钮组件展示</label>
             <w-button>按钮</w-button>
+            <w-button type="default">default</w-button>
+            <w-button :iconLeft="icon">icon</w-button>
+            <w-button type="ghost">ghost</w-button>
+            <w-button type="warning">warning</w-button>
+            <w-button width="200" type="ghost">ghost + width</w-button>
+            <w-button type="primary">primary</w-button>
+            <w-button iconLeft="&#xe62b;" iconRight="&#xe60f;" type="ghost">按钮</w-button>
+            <w-button type="default" :disabled="true">禁用</w-button>
         </div>
     </div>
 </template>
@@ -32,7 +41,9 @@ export default {
         WButton
     },
     data () {
-        return {}
+        return {
+            icon: '&#xe62b;'
+        }
     },
     mounted() {
         this.query()
@@ -59,4 +70,16 @@ export default {
         font-size 46px
         font-weight 500
         margin-bottom 0
+    
+    .btn-box
+        width 730px
+        padding 20px
+        border 1px solid #f1f1f1
+        margin 10px
+        text-align left
+        .box-title
+            text-align left
+            display block
+            color #aaaaaa
+            font-size 16px
 </style>
