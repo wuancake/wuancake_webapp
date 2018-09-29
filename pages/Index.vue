@@ -16,12 +16,17 @@
             <w-button iconLeft="&#xe62b;" iconRight="&#xe60f;" type="ghost">按钮</w-button>
             <w-button type="default" :disabled="true">禁用</w-button>
         </div>
+        <div class="input-box">
+            <label class="box-title">input组件展示</label>
+            <w-input @on-input="handleInput"></w-input>
+        </div>
     </div>
 </template>
 
 <script>
 import { getGroupList } from '../api/group.js'
 import WButton from '../components/WButton'
+import WInput from '../components/WInput'
 function setState(store) {}
 
 export default {
@@ -38,7 +43,8 @@ export default {
         setState(store);
     },
     components: {
-        WButton
+        WButton,
+        WInput
     },
     data () {
         return {
@@ -53,6 +59,9 @@ export default {
             getGroupList().then(res => {
                 console.log(res)
             })
+        },
+        handleInput (event) {
+            console.log(event)
         }
     }
 };
@@ -71,7 +80,8 @@ export default {
         font-weight 500
         margin-bottom 0
     
-    .btn-box
+    .btn-box,
+    .input-box
         width 730px
         padding 20px
         border 1px solid #f1f1f1
