@@ -1,5 +1,14 @@
 <template>
-    <input :class="classes" :style="{ width: `${this.width}px` }" :value="value" :placeholder="placeholder" @input="handleInput" @change="handleChange" @focus="handleFocus" @blur="handleBlur" :type="type">
+    <input
+        :class="classes"
+        :style="{ width: `${this.width}px` }"
+        :value="value"
+        :placeholder="placeholder"
+        @input="handleInput"
+        @change="handleChange"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        :type="type">
 </template>
 
 <script>
@@ -61,7 +70,14 @@ export default {
 
 <style lang="stylus" scoped>
 .w-input {
-    box-sizing border-box
+    box-sizing: border-box;
+    border: 1px solid #adccff;
+    text-align: center;
+    font-size: 34px;
+    box-shadow: 0 2px 1px 0 #4d156e30 inset, 0 0 3px 0 #4d156e30;
+}
+.w-input::-webkit-input-placeholder {
+    color #9f9f9f
 }
 .w-input-type-textarea {
 
