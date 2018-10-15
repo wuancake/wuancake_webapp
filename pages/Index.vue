@@ -18,7 +18,10 @@
         </div>
         <div class="input-box">
             <label class="box-title">input组件展示</label>
-            <w-input @on-input="handleInput"></w-input>
+            <w-input @on-input="handleInput" @on-change="handleChange" @on-focus="handleFocus" @on-blur="handleBlur"></w-input>
+            <w-input placeholder="textarea" type="textarea"></w-input>
+            <w-input placeholder="password" type="password"></w-input>
+            <w-input placeholder="set width" :width="200"></w-input>
         </div>
     </div>
 </template>
@@ -62,6 +65,15 @@ export default {
         },
         handleInput (event) {
             console.log(event)
+        },
+        handleChange (event) {
+            console.log(event)
+        },
+        handleFocus (event) {
+            console.log(event)
+        },
+        handleBlur (event) {
+            console.log(event)
         }
     }
 };
@@ -87,6 +99,8 @@ export default {
         border 1px solid #f1f1f1
         margin 10px
         text-align left
+        *
+            margin 10px 0
         .box-title
             text-align left
             display block

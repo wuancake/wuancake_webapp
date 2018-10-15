@@ -1,13 +1,34 @@
 <template>
-    <input :value="value" @input="handleInput" @change="handleChange" @focus="handleFocus" @blur="handleBlur" :type="type">
+    <input
+        :class="classes"
+        :style="{ width: `${this.width}px` }"
+        :value="value"
+        :placeholder="placeholder"
+        @input="handleInput"
+        @change="handleChange"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        :type="type">
 </template>
 
 <script>
+const baseCls = 'w-input'
 export default {
     props: {
-        value: {},
+        value: {
+            type: String
+        },
         type: {
             default: 'text'
+        },
+        placeholder: {
+            type: String
+        },
+        line: {
+            type: Boolean
+        },
+        width: {
+            type: Number
         }
     },
     data () {
@@ -15,18 +36,32 @@ export default {
             
         }
     },
+    computed: {
+        classes () {
+            return [
+                `${baseCls}`,
+                {
+                    [`${baseCls}-type-${this.type}`]: this.type === 'textarea',
+                    [`${baseCls}-line`]: this.line
+                }
+            ]
+        }
+    },
     methods: {
-        handleInput (event) {
-            console.log('handleInput')
+        handleInput (event) { // 输入中触发的事件
+            // console.log('handleInput')
             this.$emit('on-input', event)
         },
-        handleChange (event) {
+        handleChange (event) { // 输入框失去焦点且数据与上次不同时触发的事件
+            // console.log('handleChange')
             this.$emit('on-change', event)
         },
-        handleFocus (event) {
+        handleFocus (event) { // 输入框获取焦点时触发的事件
+            // console.log('handleFocus')
             this.$emit('on-focus', event)
         },
-        handleBlur (event) {
+        handleBlur (event) { // 输入框失去焦点时触发的事件
+            // console.log('handleBlur')
             this.$emit('on-blur', event)
         }
     }
@@ -34,5 +69,20 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.w-input {
+    box-sizing: border-box;
+    border: 1px solid #adccff;
+    text-align: center;
+    font-size: 34px;
+    box-shadow: 0 2px 1px 0 #4d156e30 inset, 0 0 3px 0 #4d156e30;
+}
+.w-input::-webkit-input-placeholder {
+    color #9f9f9f
+}
+.w-input-type-textarea {
 
+}
+.w-input-line {
+
+}
 </style>
