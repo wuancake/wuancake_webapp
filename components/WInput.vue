@@ -1,5 +1,6 @@
 <template>
     <input
+        v-if="!row"
         :class="classes"
         :style="{ width: `${this.width}px` }"
         :value="value"
@@ -9,6 +10,17 @@
         @focus="handleFocus"
         @blur="handleBlur"
         :type="type">
+    <textarea
+        v-else
+        :rows="row"
+        :class="classes"
+        :style="{ width: `${this.width}px` }"
+        :value="value"
+        :placeholder="placeholder"
+        @input="handleInput"
+        @change="handleChange"
+        @focus="handleFocus"
+        @blur="handleBlur"></textarea>
 </template>
 
 <script>
@@ -24,10 +36,13 @@ export default {
         placeholder: {
             type: String
         },
-        line: {
-            type: Boolean
-        },
+        // line: {
+        //     type: Boolean
+        // },
         width: {
+            type: Number
+        },
+        row: {
             type: Number
         }
     },
@@ -42,7 +57,8 @@ export default {
                 `${baseCls}`,
                 {
                     [`${baseCls}-type-${this.type}`]: this.type === 'textarea',
-                    [`${baseCls}-line`]: this.line
+                    [`${baseCls}-type-default`]: this.type === 'text' || this.type === 'password',
+                    [`${baseCls}-line`]: this.type === 'line'
                 }
             ]
         }
@@ -72,17 +88,34 @@ export default {
 .w-input {
     box-sizing: border-box;
     border: 1px solid #adccff;
+    box-sizing: border-box;
+    outline: none;
+}
+.w-input-type-default {
+    width: 540px;
+    height: 86px;
+    border-radius: 43px;
     text-align: center;
-    font-size: 34px;
     box-shadow: 0 2px 1px 0 #4d156e30 inset, 0 0 3px 0 #4d156e30;
+    font-size: 34px;
 }
 .w-input::-webkit-input-placeholder {
     color #9f9f9f
 }
 .w-input-type-textarea {
-
+    width 690px
+    border-radius 6px
+    resize none
+    padding 20px
 }
 .w-input-line {
-
+    border 0
+    border-bottom 1px solid #555
+    font-size 12px
+    color #9f9f9f
+    box-shadow 0
+    border-radius 0
+    padding 10px
+    background transparent
 }
 </style>

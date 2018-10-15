@@ -19,9 +19,10 @@
         <div class="input-box">
             <label class="box-title">input组件展示</label>
             <w-input @on-input="handleInput" @on-change="handleChange" @on-focus="handleFocus" @on-blur="handleBlur"></w-input>
-            <w-input placeholder="textarea" type="textarea"></w-input>
+            <w-input placeholder="textarea" type="textarea" :row="3"></w-input>
             <w-input placeholder="password" type="password"></w-input>
             <w-input placeholder="set width" :width="200"></w-input>
+            <w-input placeholder="输入新昵称" type="line" :width="200"></w-input>
         </div>
     </div>
 </template>
