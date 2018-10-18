@@ -24,6 +24,13 @@
             <w-input placeholder="set width" :width="200"></w-input>
             <w-input placeholder="输入新昵称" type="line" :width="200"></w-input>
         </div>
+        <div class="cell-box">
+            <label class="box-title">cell组件展示</label>
+            <w-list>
+                <w-icon value="&#xe62b;" slot="left-icon"></w-icon>
+                <span slot="left-text">hahah</span>
+            </w-list>
+        </div>
     </div>
 </template>
 
@@ -31,6 +38,8 @@
 import { getGroupList } from '../api/group.js'
 import WButton from '../components/WButton'
 import WInput from '../components/WInput'
+import WList from '../components/WLIst'
+import WIcon from '../components/WIcon'
 function setState(store) {}
 
 export default {
@@ -48,7 +57,9 @@ export default {
     },
     components: {
         WButton,
-        WInput
+        WInput,
+        WList,
+        WIcon
     },
     data () {
         return {
@@ -94,7 +105,8 @@ export default {
         margin-bottom 0
     
     .btn-box,
-    .input-box
+    .input-box,
+    .cell-box
         width 730px
         padding 20px
         border 1px solid #f1f1f1
