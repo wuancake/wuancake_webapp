@@ -1,9 +1,5 @@
 <template>
     <div class="page-index">
-        <h2>LAVAS</h2>
-        <h4>[ˈlɑ:vəz]</h4>
-        <button @click="query">fetch</button>
-        <i class="iconfont">&#xe62b;</i>
         <div class="btn-box">
             <label class="box-title">按钮组件展示</label>
             <w-button>按钮</w-button>
@@ -15,6 +11,9 @@
             <w-button type="primary">primary</w-button>
             <w-button iconLeft="&#xe62b;" iconRight="&#xe60f;" type="ghost">按钮</w-button>
             <w-button type="default" :disabled="true">禁用</w-button>
+        </div>
+        <div class="btn-box">
+            <w-button type="default" @click="goHome">去首页</w-button>
         </div>
         <div class="input-box">
             <label class="box-title">input组件展示</label>
@@ -86,7 +85,10 @@ export default {
         },
         handleBlur (event) {
             console.log(event)
-        }
+        },
+        goHome () {
+            this.$router.push('home')
+        },
     }
 };
 </script>

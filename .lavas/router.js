@@ -2,34 +2,44 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
     
-import _15398501009519d49a922ebc8a6d77ca82c0a74289b98 from '@/pages/Appshell.vue';
+import _15401953258459d49a922ebc8a6d77ca82c0a74289b98 from '@/pages/Appshell.vue';
     
 
     
-import _1539850100951d2462dcf0c7beccd286c658e08187914 from '@/pages/Error.vue';
+import _1540195325845d2462dcf0c7beccd286c658e08187914 from '@/pages/Error.vue';
     
 
     
-import _153985010095167830448037326425509e44bce7632b7 from '@/pages/Index.vue';
+import _154019532584567830448037326425509e44bce7632b7 from '@/pages/Index.vue';
+    
+
+    
+import _15401953258458df541b53e4cb5088c52e8d2c73e2b09 from '@/pages/login.vue';
     
 
 
 let routes = [
     {
         "path": "/appshell",
-        "component": _15398501009519d49a922ebc8a6d77ca82c0a74289b98,
+        "component": _15401953258459d49a922ebc8a6d77ca82c0a74289b98,
         "meta": {},
         "name": "appshell"
     },
     {
         "path": "/",
-        "component": _153985010095167830448037326425509e44bce7632b7,
+        "component": _154019532584567830448037326425509e44bce7632b7,
         "meta": {},
         "name": "index"
     },
     {
+        "path": "/login",
+        "component": _15401953258458df541b53e4cb5088c52e8d2c73e2b09,
+        "meta": {},
+        "name": "login"
+    },
+    {
         "path": "/error",
-        "component": _1539850100951d2462dcf0c7beccd286c658e08187914,
+        "component": _1540195325845d2462dcf0c7beccd286c658e08187914,
         "meta": {},
         "name": "error",
         "alias": "*"
