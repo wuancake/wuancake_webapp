@@ -2,7 +2,7 @@
     <input
         v-if="!row"
         :class="classes"
-        :style="{ width: `${this.width}px` }"
+        :style="{ width: `${this.width}px`, 'border-color': verification ? '#adccff' : '#ff5b5b' }"
         :value="value"
         :placeholder="placeholder"
         @input="handleInput"
@@ -44,6 +44,9 @@ export default {
         },
         row: {
             type: Number
+        },
+        verification: {
+            type: Boolean
         }
     },
     data () {

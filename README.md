@@ -87,3 +87,7 @@ slot
 ## 建议
 
 git 代码更新后，重新 lavas dev 一下，因为 router.js 、config.js 、skeleton.js 是 lavas 自动更新的，每个人的会不一样。
+
+## 文档地址
+
+[接口文档](https://www.showdoc.cc/130527997100157?page_id=894392582602755)
