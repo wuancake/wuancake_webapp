@@ -26,7 +26,7 @@
     },
     "serviceWorker": {
         "enable": true,
-        "swDest": "D:\\CODE\\wuancake_webapp\\dist\\service-worker.js"
+        "swDest": "F:\\mywork\\wuancake_webapp\\dist\\service-worker.js"
     },
     "skeleton": {
         "enable": true,

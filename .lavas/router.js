@@ -28,6 +28,12 @@ let routes = [
         "name": "index"
     },
     {
+        "path": "/login",
+        "component": _15401953258458df541b53e4cb5088c52e8d2c73e2b09,
+        "meta": {},
+        "name": "login"
+    },
+    {
         "path": "/error",
         "component": _1540302642176d2462dcf0c7beccd286c658e08187914,
         "meta": {},
