@@ -7,3 +7,11 @@ export function login (params = {}) {
     data: params
   })
 }
+
+export function signup (params = {}) {
+  return fetch({
+    url: '/regist',
+    method: 'post',
+    data: params
+  })
+}
