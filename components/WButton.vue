@@ -85,12 +85,12 @@ export default {
 }
 .w-btn-default {
     color #ffffff
-    background #7abafe
+    background $input-primaryLightBLue
 }
 .w-btn-ghost {
     background transparent
-    color #1987fc
-    border 1px solid #7abafe
+    color $input-primaryDeepSkyBlue
+    border 1px solid $input-primaryLightBLue
 }
 .w-btn-warning {
     background #ffffff
@@ -98,7 +98,7 @@ export default {
     border 1px solid #f27a7a
 }
 .w-btn-primary {
-    background #1987fc
+    background $input-primaryDeepSkyBlue
     color #ffffff
 }
 </style>

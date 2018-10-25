@@ -1,4 +1,4 @@
-@import './reset.styl'
+@import './variable.styl'
 
 // 头像  begin
 portrait(porSize = 180px)
@@ -35,5 +35,24 @@ radio()
     // margin: 0;
 // radio重置 end
 
+//login-page顶部间距 和flex布局 begin
+pageFlexCenter(flexDirection = column, alignItems = center,justifyContent = start)
+    display flex
+    flex-direction flexDirection
+    align-items alignItems
+    justify-content justifyContent
+    
+pageTopGap(paddingTop = 88px)
+    width 100%
+    padding-top paddingTop
+    position relative
+//login-page顶部间距 end
 
+// 椭圆表单 beign
+radiusInput()
+  .radius-input
+    margin-bottom $input-bottomGap
+    &:last-child
+      margin-bottom ($input-bottomGap*3)
+// 椭圆表单 end
 

@@ -2,8 +2,11 @@
   <div class="login-page">
     <img class="login-img" v-if="url" :src="url" alt="">
     <div class="login-img img-info" v-else>LOGO</div>
-    <w-input :value="email" :verification="isVerificationEmail" @on-blur="emailInput" placeholder="输入电子邮箱"></w-input>
-    <w-input :value="password" type="password" :verification="isVerificationPassword" @on-blur="passwordInput" class="login-input" placeholder="输入登录密码"></w-input>
+    <div class="form-radius">
+      <w-input class="radius-input" :value="email" :verification="isVerificationEmail" @on-blur="emailInput" placeholder="输入电子邮箱"></w-input>
+      <w-input class="radius-input" :value="password" type="password" :verification="isVerificationPassword" @on-blur="passwordInput" placeholder="输入登录密码"></w-input>
+    </div>
+
     <div class="login-btns">
       <button @click="goSignUp" class="login-btn login-btn-item">注册</button>
       <button @click="toLogin" class="login-btn login-btn-item">登录</button>
@@ -92,13 +95,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '../assets/css/common.styl'
+
 .login-page
-  width 100%
-  display flex
-  flex-direction column
-  align-items center
-  padding-top 88px
-  position relative
+  pageFlexCenter()
+  pageTopGap()
 
   .login-img
     width 200px
@@ -113,9 +114,7 @@ export default {
 
   .login-bnts
     width 100%
-    display flex
-    justify-content center
-    align-items center
+    pageFlexCenter()
 
 .login-btn
   width 260px
@@ -129,23 +128,22 @@ export default {
 .login-btn-item
   border-radius 42px
   &:first-child
-    border 1px solid #7abafe
+    border 1px solid $input-primaryLightBLue
     box-shadow 0 2px 1px 0 #4d156e30 inset, 0 0 3px 0 #4d156e30
     background #ffffff
-    color #1987fc
+    color $input-primaryDeepSkyBlue
   &:last-child
-    background #1987fc
+    background $input-primaryDeepSkyBlue
     color #ffffff
 
 .login-btn-footer
   background transparent
-  color #1987fc
+  color $input-primaryDeepSkyBlue
   font-size 32px
   position absolute
   bottom 10px
   right 0
 
-.login-input
-  margin-top 24px
-  margin-bottom 66px
+.form-radius
+  radiusInput()
 </style>
