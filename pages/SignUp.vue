@@ -4,7 +4,6 @@
     <div class="form-radius">
       <w-input :value="user.account" :verification="isVerification.Account" class="radius-input" @on-blur="accountInput" placeholder="输入账号"></w-input>
       <w-input :value="user.email" :verification="isVerification.Email" class="radius-input"  @on-blur="emailInput" placeholder="输入电子邮箱"></w-input>
-      <w-input :value="user.name" :verification="isVerification.Name" class="radius-input"  @on-blur="nameInput" placeholder="输入昵称"></w-input>
       <w-input :value="user.QQ" :verification="isVerification.QQ" class="radius-input" @on-blur="qqInput"   placeholder="输入QQ"></w-input>
       <w-input :value="user.password" type="password" :verification="isVerification.Password"   class="radius-input" @on-blur="passwordInput" placeholder="输入密码"></w-input>
       <w-input :value="user.passwordT" type="password" :verification="isVerification.PasswordT"   class="radius-input" @on-blur="passwordTInput" placeholder="确认密码"></w-input>
@@ -12,7 +11,7 @@
     <!-- 椭圆表单 end -->
 
     <div class="login-btns">
-      <button @click="goLogin" class="login-btn login-btn-item">注册</button>
+      <button @click="getSignUp" class="login-btn login-btn-item">注册</button>
     </div>
     <button class="login-btn login-btn-footer" @click="goLogin">已有账号？点击登录</button>
   </div>
@@ -32,18 +31,13 @@ export default {
       user:{
         account:'',
         email:'',
-        name:'',
         QQ:'',
         password:'',
         passwordT:''
       },
       isVerification:{
-        // 电子邮箱正则
-        deal: '^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$',
-        emailOk: false,
         Account:true,
         Email:true,
-        name:true,
         QQ:true,
         Password:true,
         PasswordT:true
@@ -51,30 +45,52 @@ export default {
     }
   },
   methods:{
-    ...mapMutations('user', ['setUserInfo']),
-    accountInput(){
-      console.log('accountInput');
-    },
-    emailInput(){
-      console.log('emailInput');
-    },
-    nameInput(){
-      console.log('nameInput');
-    },
-    qqInput(){
-      console.log('qqInput');
-    },
-    passwordInput(){
-      console.log('passwordInput');
-    },
-    passwordTInput(){
-      console.log('passwordTInput');
-    },
-    goLogin () {
+
+    getSignUp() {
+      // 注册
+     
+      signup({
+        userName: this.user.account,
+        email: this.user.email,
+        qq:this.user.QQ,
+        password:this.user.password
+      }).then(res =>{
+         debugger
+        if(res.data.infoCode === 200){
+          alert(res.data.infoText)
+        }
+        else if(res.data.infoCode === 500){
+          alert(res.data.infoText)
+        }
+        else{
+          alert("注册失败")
+        }
+      })
+
       this.$router.push({
-        path: '/login'
+        // path: '/login'
       })
     },
+    accountInput(){
+      console.log(user.account);
+    },
+    emailInput(){
+      console.log(user.account);
+    },
+    qqInput(){
+      // console.log('qqInput');
+    },
+    passwordInput(){
+      // console.log('passwordInput');
+    },
+    passwordTInput(){
+      // console.log('passwordTInput');
+    },
+    goLogin(){
+      this.$router.push({
+        // path:'/login'
+      })
+    }
   }
 }
 </script>
