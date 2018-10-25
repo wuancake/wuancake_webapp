@@ -23,3 +23,11 @@ export function pushEmail (params = {}) {
     data: params
   })
 }
+
+export function changePassword (params = {}) {
+  return fetch({
+    url: '/updatePassword',
+    method: 'post',
+    data: params
+  })
+}

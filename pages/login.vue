@@ -64,6 +64,7 @@ export default {
             // TODO: 全局消息提醒
             alert(res.data.infoText)
           } else {
+            alert(res.data.infoText)
             this.setUserInfo(res.data)
             this.$router.push({
               path: '/'
