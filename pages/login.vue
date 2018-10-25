@@ -2,9 +2,16 @@
   <div class="login-page">
     <img class="login-img" v-if="url" :src="url" alt="">
     <div class="login-img img-info" v-else>LOGO</div>
-    <div class="form-radius">
-      <w-input class="radius-input" :value="email" :verification="isVerificationEmail" @on-blur="emailInput" placeholder="输入电子邮箱"></w-input>
-      <w-input class="radius-input" :value="password" type="password" :verification="isVerificationPassword" @on-blur="passwordInput" placeholder="输入登录密码"></w-input>
+    <div class="form-items">
+      <div class="form-item">
+        <w-input class="radius-input input-email-label" :style="verificationEamil ? setMargin : ''" :value="email" :verification="isVerificationEmail" @on-blur="emailInput" placeholder="输入电子邮箱"></w-input>
+        <p v-if="verificationEamil === 1">邮箱地址是必填项</p>
+        <p v-if="verificationEamil === 2">邮箱地址格式错误</p>
+      </div>
+      <div class="form-item">
+        <w-input class="radius-input input-password-label" :style="verificationPassword ? setMargin : ''" :value="password" type="password" :verification="isVerificationPassword" @on-blur="passwordInput" placeholder="输入登录密码"></w-input>
+        <p v-if="verificationPassword === 1">登录密码不能为空</p>
+      </div>
     </div>
 
     <div class="login-btns">
@@ -32,7 +39,12 @@ export default {
       deal: '^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$',
       emailOk: false,
       isVerificationEmail: true,
-      isVerificationPassword: true
+      isVerificationPassword: true,
+      verificationEamil: 0,
+      verificationPassword: 0,
+      setMargin: {
+        'margin-bottom': 0
+      }
     }
   },
   methods: {
@@ -41,6 +53,8 @@ export default {
       if (this.emailOk && this.password) {
         this.isVerificationEmail = true
         this.isVerificationPassword = true
+        this.verificationPassword = 0
+        this.verificationEamil = 0
         login({
           email: this.email,
           password: this.password
@@ -66,6 +80,15 @@ export default {
           this.isVerificationPassword = false
         } else {
           this.isVerificationPassword = true
+        }
+        if (!this.email) {
+          this.verificationEamil = 1
+        }
+        if (!this.emailOk) {
+          this.verificationEamil = 2
+        }
+        if (!this.password) {
+          this.verificationPassword = 1
         }
       }
     },
@@ -146,4 +169,21 @@ export default {
 
 .form-radius
   radiusInput()
+
+// .form-items
+
+.form-item
+  position relative
+  margin-bottom ($input-bottomGap * 1.5)
+  &:last-child
+    margin-bottom ($input-bottomGap*3)
+  p
+    margin 0
+    position absolute
+    font-size 8px
+    color red
+    height ($input-bottomGap * 1.5)
+    line-height ($input-bottomGap * 1.5)
+    box-sizing border-box
+    padding-left 40px
 </style>
