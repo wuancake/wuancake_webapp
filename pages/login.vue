@@ -18,7 +18,7 @@
       <button @click="goSignUp" class="login-btn login-btn-item">注册</button>
       <button @click="toLogin" class="login-btn login-btn-item">登录</button>
     </div>
-    <button class="login-btn login-btn-footer">忘记密码？</button>
+    <button @click="goForgetPassword" class="login-btn login-btn-footer">忘记密码？</button>
   </div>
 </template>
 
@@ -112,6 +112,11 @@ export default {
       this.$router.push({
         path: '/sign-up'
       })
+    },
+    goForgetPassword () {
+      this.$router.push({
+        path: '/forget-password'
+      })
     }
   }
 }
@@ -180,7 +185,7 @@ export default {
   p
     margin 0
     position absolute
-    font-size 8px
+    font-size 12px
     color red
     height ($input-bottomGap * 1.5)
     line-height ($input-bottomGap * 1.5)

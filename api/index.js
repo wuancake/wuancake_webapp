@@ -15,3 +15,11 @@ export function signup (params = {}) {
     data: params
   })
 }
+
+export function pushEmail (params = {}) {
+  return fetch({
+    url: '/forget',
+    method: 'post',
+    data: params
+  })
+}
