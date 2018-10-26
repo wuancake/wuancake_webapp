@@ -2,11 +2,18 @@
   <div class="signup-page">
     <!-- 椭圆表单 begin -->
     <div class="form-radius">
-      <w-input :value="user.account" :verification="isVerification.Account" class="radius-input" @on-blur="accountInput" placeholder="输入账号"></w-input>
-      <w-input :value="user.email" :verification="isVerification.Email" class="radius-input"  @on-blur="emailInput" placeholder="输入电子邮箱"></w-input>
-      <w-input :value="user.QQ" :verification="isVerification.QQ" class="radius-input" @on-blur="qqInput"   placeholder="输入QQ"></w-input>
-      <w-input :value="user.password" type="password" :verification="isVerification.Password"   class="radius-input" @on-blur="passwordInput" placeholder="输入密码"></w-input>
-      <w-input :value="user.passwordT" type="password" :verification="isVerification.PasswordT"   class="radius-input" @on-blur="passwordTInput" placeholder="确认密码"></w-input>
+      <w-input :value="username" :verification="isVerification.userName" class="radius-input"  placeholder="输入账号"></w-input>
+
+      <w-input :value="email" :verification="isVerification.Email" class="radius-input"  @on-blur="emailInput" placeholder="输入电子邮箱"></w-input>
+      <p v-if="verification.Eamil === 1">邮箱地址是必填项</p>
+      <p v-if="verification.Eamil === 2">邮箱地址格式错误</p>
+
+      <w-input :value="QQ" :verification="isVerification.QQ" class="radius-input" @on-blur="qqInput"   placeholder="输入QQ"></w-input>
+      <p v-if="verification.QQ === 2">QQ格式错误</p>
+
+      <w-input :value="password" type="password" :verification="isVerification.Password"   class="radius-input" @on-blur="passwordInput" placeholder="输入密码"></w-input>
+
+      <!-- <w-input :value="user.passwordT" type="password" :verification="isVerification.PasswordT"   class="radius-input" @on-blur="passwordInput" placeholder="确认密码"></w-input> -->
     </div>
     <!-- 椭圆表单 end -->
 
@@ -29,40 +36,58 @@ export default {
   data () {
     return {
       user:{
-        account:'',
+        username:'',
         email:'',
         QQ:'',
         password:'',
-        passwordT:''
+        passwordT:'',
       },
-      isVerification:{
-        Account:true,
+        isVerification:{
+        UserName:true,
         Email:true,
         QQ:true,
         Password:true,
-        PasswordT:true
+        PasswordT:true,
+      },
+      verification:{
+        UserName:0,
+        Email:0,
+        QQ:0,
+        Password:0,
+        PasswordT:0,
+      },
+      deal:{ 
+        Email: '^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$',
+        QQ:'^[0-9]*$'
       }
     }
   },
   methods:{
-
+    ...mapMutations('user', ['setUserInfo']),
+    
     getSignUp() {
+      if (condition) {
+        
+      } else {
+        
+      }
       // 注册
-     
       signup({
-        userName: this.user.account,
+        userName: this.user.username,
         email: this.user.email,
         qq:this.user.QQ,
         password:this.user.password
       }).then(res =>{
-         debugger
+        console.log(res)
         if(res.data.infoCode === 200){
+          this.setUserInfo(res.data)
           alert(res.data.infoText)
         }
         else if(res.data.infoCode === 500){
           alert(res.data.infoText)
         }
         else{
+          this.setUserInfo(res.data)
           alert("注册失败")
         }
       })
@@ -72,21 +97,64 @@ export default {
       })
     },
     accountInput(){
-      console.log(user.account);
+      user.account = true;
     },
-    emailInput(){
-      console.log(user.account);
+    // 电子邮箱验证
+    emailInput(event) {
+      let a = new RegExp(this.deal.Email);
+      this.user.email = event.target.value;
+      if(event.target.value) {
+    
+        if(a.test(this.user.email)) {
+          this.verification.Email = 0;
+          this.isVerification.Email = true;
+          console.log(this.user.email,this.verification.Email,111)
+        }
+        else{
+          this.verification.Email = 2;
+          this.isVerification.Email = false;
+          console.log(this.user.email,this.verification.Email,222)
+        }
+      }
+      else{
+        console.log(this.user.email,this.verification.Email,0)
+      }
     },
-    qqInput(){
-      // console.log('qqInput');
+    // QQ验证
+    qqInput(event){
+      let a = new RegExp(this.deal.QQ);
+      this.user.QQ = event.targt.value;
+      if(event.target.value) {
+    
+        if(a.test(this.user.QQ)) {
+          this.verification.QQ = 0;
+          this.isVerification.QQ = true;
+          console.log(this.user.QQ,this.verification.QQ,111)
+        }
+        else{
+          this.verification.QQ = 2;
+          this.isVerification.QQ = false;
+          console.log(this.user.QQ,this.verification.QQ,222)
+        }
+      }
+      else{
+        console.log(this.user.email,this.verification.Email,0)
+      }
     },
-    passwordInput(){
-      // console.log('passwordInput');
-    },
-    passwordTInput(){
-      // console.log('passwordTInput');
+    passwordInput(event) {
+      if (event.target.value) {
+        this.password = event.target.value;
+      }
     },
     goLogin(){
+
+      if(this.user.email === "" || this.user.email === null){
+          this.verification.Email = 1;
+          console.log(this.verification.Email)
+          console.log(this.user.email,1111)
+      }
+
+
       this.$router.push({
         // path:'/login'
       })
