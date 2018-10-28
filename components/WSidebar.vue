@@ -8,9 +8,9 @@
                     <span class="wuan_cake_name">{{ username }}</span>
                 </div>
                 <ul class="wuan_cake_list">
-                    <li>首页</li>
-                    <li>我的周报</li>
-                    <li>我的账号</li>
+                    <li><router-link to="index">首页</router-link></li>
+                    <li><router-link to="">我的周报</router-link></li>
+                    <li><router-link to="">我的账号</router-link></li>
                 </ul>
                 <input class="wuan_btn_abort" type="button" value="退出"/>
             </div>
