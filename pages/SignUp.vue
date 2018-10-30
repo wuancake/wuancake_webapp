@@ -5,9 +5,8 @@
     <div class="form-items">
       <!-- 输入用户名 -->
       <div class="form-radius form-item">
-        <w-input :value="user.username" @on-blur="userInput" :verification="isVerification.UserName"
-        :style="verification.UserName ? setMargin : ''"  class="radius-input"  placeholder="输入用户名"></w-input>
-        <p v-if="verification.UserName === 1">用户名是必填项</p>
+        <w-input :value="user.username" :verification="isVerification.UserName"
+        class="radius-input" @on-blur="userInput"   placeholder="输入用户名"></w-input>
       </div>
       <!-- 输入电子邮箱 -->
       <div class="form-item">
@@ -18,9 +17,7 @@
 
       <!-- 输入QQ -->
       <div class="form-item">
-        <w-input :value="user.qq" :verification="isVerification.QQ" :style="verification.QQ ? setMargin : ''"  class="radius-input" @on-blur="qqInput" placeholder="输入QQ"></w-input>
-        <p v-if="verification.QQ === 1">QQ是必填项</p>
-        <p v-if="verification.QQ === 2">QQ格式错误</p>
+        <w-input :value="user.qq" :verification="isVerification.QQ"   class="radius-input" @on-blur="qqInput" placeholder="输入QQ"></w-input>
       </div>
 
       <!-- 输入密码 -->
@@ -71,15 +68,13 @@ export default {
         PasswordT:true,
       },
       verification:{
-        UserName:0,
         Email:0,
-        QQ:0,
         Password:0,
         PasswordT:0,
       },
       deal:{ 
         Email: '^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$',
-        QQ:'^[0-9]*$'
+        
       },
       setMargin: {
         'margin-bottom': 0
@@ -87,20 +82,10 @@ export default {
     }
   },
   methods:{
-    // ...mapMutations('user', ['setUserInfo']),
-    
     getSignUp() {
-      if(this.user.username === "" || this.user.username === null){
-        this.verification.UserName = 1;
-        this.isVerification.UserName = false;
-      }
       if(this.user.email === "" || this.user.email === null){
         this.verification.Email = 1;
         this.isVerification.Email = false;
-      }
-      if(this.user.qq === "" || this.user.qq === null){
-        this.verification.QQ = 1;
-        this.isVerification.QQ = false;
       }
       if(this.user.password === "" || this.user.password === null){
         this.verification.Password = 1;
@@ -110,7 +95,17 @@ export default {
         this.verification.PasswordT = 1;
         this.isVerification.PasswordT = false;
       }
-      else if(this.isVerification.UserName && this.isVerification.Email && this.isVerification.Password && this.isVerification.PasswordT && this.isVerification.QQ){
+      if(this.user.passwordT != this.user.password){
+        this.verification.PasswordT = 2;
+        this.isVerification.PasswordT = false;
+      }
+      else if(this.isVerification.Email && this.isVerification.Password &&  this.isVerification.PasswordT){
+        this.isVerification.Email = true;
+        this.isVerification.Password = true;
+        this.isVerification.PasswordT = true;
+        this.verification.Eamil = 0;
+        this.verification.Password = 0;
+        this.verification.PasswordT = 0;
         // 注册
         signup({
           userName: this.user.username,
@@ -119,22 +114,18 @@ export default {
           password:this.user.password
         }).then(res =>{
           console.log(res.data)
-          if(res.data.infoCode == 200){
-            this.setUserInfo(res.data)
-            alert(res.data.infoText)
-          }
-          else if(res.data.infoCode == 500){
-            alert(res.data.infoText)
+          if(res.data.infoCode != 200){
+            alert(res.data.infoText);
+             console.log(22222)
           }
           else{
-            this.setUserInfo(res.data)
-            alert("注册失败")
+            alert(res.data.infoText);
+            console.log(111)
+            this.$router.push({
+              path: '/login'
+            })
           }
         })  
-
-        this.$router.push({
-          path: '/login'
-        })
       }
       else{
 
@@ -143,7 +134,6 @@ export default {
     //用户名
     userInput(event){
       this.user.username = event.target.value;
-      this.isVerification.UserName = true;
     },
     // 电子邮箱验证
     emailInput(event) {
@@ -168,33 +158,24 @@ export default {
     },
     // QQ验证
     qqInput(event){
-      let a = new RegExp(this.deal.QQ);
       if(event.target.value) {
-      this.user.qq = event.target.value;
-        if(a.test(this.user.qq)) {
-          this.verification.QQ = 0;
-          this.isVerification.QQ = true;
-          console.log(this.user.qq,this.verification.qq,111)
-        }
-        else{
-          this.verification.QQ = 2;
-          this.isVerification.QQ = false;
-          console.log(this.user.QQ,this.verification.QQ,222)
-        }
-      }
-      else{
-        console.log(this.user.email,this.verification.Email,'QQ的')
+        this.user.qq = event.target.value;
       }
     },
+    //密码验证
     passwordInput(event) {
       if (event.target.value) {
         this.user.password = event.target.value;
+        this.verification.Password = 0;
+        this.isVerification.Password = true;
       }
     },
     // 确认密码验证
     passwordTInput(event) {
       if (event.target.value) {
         this.user.passwordT = event.target.value;
+        this.verification.PasswordT = 0;
+        this.isVerification.PasswordT = true;
       }
     },
     goLogin(){
