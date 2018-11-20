@@ -2,6 +2,9 @@
     <div class="grouping-page">
         <aside class="wuan_cake_grouping">
             <ul class="wuan_cake_list">
+              <!-- <el-radio-group v-model="curState" @change="curStateChange">
+                    <el-radio v-for="(item,index) in stateGroup" :label="item.code" :key="index">{{ item.name }}</el-radio>
+                  </el-radio-group> -->
                 <li v-for="item in groups.slice(0,7)" :key="item.id" class="wuan_cake_radio">
                   <div class="wuan_cake_radio_block">
                       <input type="radio" name="grouping" class="wuan_cake_radio_input" />
@@ -43,7 +46,6 @@ export default {
       //获取所有分组列表
       getGriopInfo(){
         findAllGroupInfo({
-          
         }).then(res=>{
            console.log(res.data);
           if(res.data.infoCode ==="200"){
@@ -57,13 +59,13 @@ export default {
       ...mapMutations('user', ['setUserInfo']),
       getGroup(){
         group({
-          userid:this.usergroup.userid,
-          groupid:this.usergroup.groupid
+          userId:this.usergroup.userid,
+          groupId:this.usergroup.groupid
         }).then(res => {
           if(res.data.infoCode != 200){
             alert(res.data.infoText)
           }else{
-             this.setUserInfo(res.data)
+             this.setUserInfo(res.data);
              this.$router.push({
               path: '/'
             })
