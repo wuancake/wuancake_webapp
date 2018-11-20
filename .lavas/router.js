@@ -2,74 +2,84 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
     
-import _15404770913029d49a922ebc8a6d77ca82c0a74289b98 from '@/pages/Appshell.vue';
+import _15404804045459d49a922ebc8a6d77ca82c0a74289b98 from '@/pages/Appshell.vue';
     
 
     
-import _1540477091302d2462dcf0c7beccd286c658e08187914 from '@/pages/Error.vue';
+import _15404804045459c9f839430bb8a7a81a1878def5842a9 from '@/pages/changePassword.vue';
     
 
     
-import _15404770913021fc08f066f41b27b30ecbed1bda422e7 from '@/pages/forgetPassword.vue';
+import _1540480404545d2462dcf0c7beccd286c658e08187914 from '@/pages/Error.vue';
     
 
     
-import _154047709130267830448037326425509e44bce7632b7 from '@/pages/Index.vue';
+import _15404804045451fc08f066f41b27b30ecbed1bda422e7 from '@/pages/forgetPassword.vue';
     
 
     
-import _15404770913028df541b53e4cb5088c52e8d2c73e2b09 from '@/pages/login.vue';
+import _154048040454567830448037326425509e44bce7632b7 from '@/pages/Index.vue';
     
 
     
-import _15404770913021fd767d722abb005d4803b600464a204 from '@/pages/OldIndex.vue';
+import _15404804045458df541b53e4cb5088c52e8d2c73e2b09 from '@/pages/login.vue';
     
 
     
-import _1540477091302c5f19d99e92dfb5fd429cf8a19b0b5d5 from '@/pages/SignUp.vue';
+import _15404804045451fd767d722abb005d4803b600464a204 from '@/pages/OldIndex.vue';
+    
+
+    
+import _1540480404545c5f19d99e92dfb5fd429cf8a19b0b5d5 from '@/pages/SignUp.vue';
     
 
 
 let routes = [
     {
         "path": "/appshell",
-        "component": _15404770913029d49a922ebc8a6d77ca82c0a74289b98,
+        "component": _15404804045459d49a922ebc8a6d77ca82c0a74289b98,
         "meta": {},
         "name": "appshell"
     },
     {
+        "path": "/change-password",
+        "component": _15404804045459c9f839430bb8a7a81a1878def5842a9,
+        "meta": {},
+        "name": "changePassword"
+    },
+    {
         "path": "/forget-password",
-        "component": _15404770913021fc08f066f41b27b30ecbed1bda422e7,
+        "component": _15404804045451fc08f066f41b27b30ecbed1bda422e7,
         "meta": {},
         "name": "forgetPassword"
     },
     {
         "path": "/",
-        "component": _154047709130267830448037326425509e44bce7632b7,
+        "component": _154048040454567830448037326425509e44bce7632b7,
         "meta": {},
         "name": "index"
     },
     {
         "path": "/login",
-        "component": _15404770913028df541b53e4cb5088c52e8d2c73e2b09,
+        "component": _15404804045458df541b53e4cb5088c52e8d2c73e2b09,
         "meta": {},
         "name": "login"
     },
     {
         "path": "/old-index",
-        "component": _15404770913021fd767d722abb005d4803b600464a204,
+        "component": _15404804045451fd767d722abb005d4803b600464a204,
         "meta": {},
         "name": "oldIndex"
     },
     {
         "path": "/sign-up",
-        "component": _1540477091302c5f19d99e92dfb5fd429cf8a19b0b5d5,
+        "component": _1540480404545c5f19d99e92dfb5fd429cf8a19b0b5d5,
         "meta": {},
         "name": "signUp"
     },
     {
         "path": "/error",
-        "component": _1540477091302d2462dcf0c7beccd286c658e08187914,
+        "component": _1540480404545d2462dcf0c7beccd286c658e08187914,
         "meta": {},
         "name": "error",
         "alias": "*"
