@@ -48,3 +48,19 @@ export function changePassword (params = {}) {
     data: params
   })
 }
+
+export function queryMain (params = {}) {
+  return fetch({
+    url: '/main',
+    method: 'post',
+    data: params
+  })
+}
+
+export function leave (params = {}) {
+  return fetch({
+    url: '/leave',
+    method: 'post',
+    data: params
+  })
+}

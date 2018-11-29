@@ -2,94 +2,114 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
     
-import _15434878002949d49a922ebc8a6d77ca82c0a74289b98 from '@/pages/Appshell.vue';
+import _15434986023859d49a922ebc8a6d77ca82c0a74289b98 from '@/pages/Appshell.vue';
     
 
     
-import _15434878002949c9f839430bb8a7a81a1878def5842a9 from '@/pages/changePassword.vue';
+import _15434986023859c9f839430bb8a7a81a1878def5842a9 from '@/pages/changePassword.vue';
     
 
     
-import _1543487800294d2462dcf0c7beccd286c658e08187914 from '@/pages/Error.vue';
+import _1543498602385d2462dcf0c7beccd286c658e08187914 from '@/pages/Error.vue';
     
 
     
-import _15434878002941fc08f066f41b27b30ecbed1bda422e7 from '@/pages/forgetPassword.vue';
+import _15434986023851fc08f066f41b27b30ecbed1bda422e7 from '@/pages/forgetPassword.vue';
     
 
     
-import _154348780029467830448037326425509e44bce7632b7 from '@/pages/Index.vue';
+import _15434986023857e956ff74231425712aa6ee1ebe29619 from '@/pages/Grouping.vue';
     
 
     
-import _15434878002948df541b53e4cb5088c52e8d2c73e2b09 from '@/pages/login.vue';
+import _154349860238567830448037326425509e44bce7632b7 from '@/pages/Index.vue';
     
 
     
-import _15434878002941fd767d722abb005d4803b600464a204 from '@/pages/OldIndex.vue';
+import _154349860238567c7fac9d0314ab40632ee4454b0fdcd from '@/pages/Leave.vue';
     
 
     
-import _15434878002941bc31d8af978036ddbc643e2325b963e from '@/pages/SelectGroup.vue';
+import _15434986023858df541b53e4cb5088c52e8d2c73e2b09 from '@/pages/login.vue';
     
 
     
-import _1543487800294c5f19d99e92dfb5fd429cf8a19b0b5d5 from '@/pages/SignUp.vue';
+import _15434986023851fd767d722abb005d4803b600464a204 from '@/pages/OldIndex.vue';
+    
+
+    
+import _1543498602385c5f19d99e92dfb5fd429cf8a19b0b5d5 from '@/pages/SignUp.vue';
+    
+
+    
+import _154349860238591bf2e35394f7ea75808a659f2014e2c from '@/pages/SubmitWeekly.vue';
     
 
 
 let routes = [
     {
         "path": "/appshell",
-        "component": _15434878002949d49a922ebc8a6d77ca82c0a74289b98,
+        "component": _15434986023859d49a922ebc8a6d77ca82c0a74289b98,
         "meta": {},
         "name": "appshell"
     },
     {
         "path": "/change-password",
-        "component": _15434878002949c9f839430bb8a7a81a1878def5842a9,
+        "component": _15434986023859c9f839430bb8a7a81a1878def5842a9,
         "meta": {},
         "name": "changePassword"
     },
     {
         "path": "/forget-password",
-        "component": _15434878002941fc08f066f41b27b30ecbed1bda422e7,
+        "component": _15434986023851fc08f066f41b27b30ecbed1bda422e7,
         "meta": {},
         "name": "forgetPassword"
     },
     {
+        "path": "/grouping",
+        "component": _15434986023857e956ff74231425712aa6ee1ebe29619,
+        "meta": {},
+        "name": "grouping"
+    },
+    {
         "path": "/",
-        "component": _154348780029467830448037326425509e44bce7632b7,
+        "component": _154349860238567830448037326425509e44bce7632b7,
         "meta": {},
         "name": "index"
     },
     {
+        "path": "/leave",
+        "component": _154349860238567c7fac9d0314ab40632ee4454b0fdcd,
+        "meta": {},
+        "name": "leave"
+    },
+    {
         "path": "/login",
-        "component": _15434878002948df541b53e4cb5088c52e8d2c73e2b09,
+        "component": _15434986023858df541b53e4cb5088c52e8d2c73e2b09,
         "meta": {},
         "name": "login"
     },
     {
         "path": "/old-index",
-        "component": _15434878002941fd767d722abb005d4803b600464a204,
+        "component": _15434986023851fd767d722abb005d4803b600464a204,
         "meta": {},
         "name": "oldIndex"
     },
     {
-        "path": "/select-group",
-        "component": _15434878002941bc31d8af978036ddbc643e2325b963e,
-        "meta": {},
-        "name": "selectGroup"
-    },
-    {
         "path": "/sign-up",
-        "component": _1543487800294c5f19d99e92dfb5fd429cf8a19b0b5d5,
+        "component": _1543498602385c5f19d99e92dfb5fd429cf8a19b0b5d5,
         "meta": {},
         "name": "signUp"
     },
     {
+        "path": "/submit-weekly",
+        "component": _154349860238591bf2e35394f7ea75808a659f2014e2c,
+        "meta": {},
+        "name": "submitWeekly"
+    },
+    {
         "path": "/error",
-        "component": _1543487800294d2462dcf0c7beccd286c658e08187914,
+        "component": _1543498602385d2462dcf0c7beccd286c658e08187914,
         "meta": {},
         "name": "error",
         "alias": "*"

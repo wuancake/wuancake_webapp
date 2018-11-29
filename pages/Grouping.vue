@@ -5,7 +5,7 @@
               <!-- <el-radio-group v-model="curState" @change="curStateChange">
                     <el-radio v-for="(item,index) in stateGroup" :label="item.code" :key="index">{{ item.name }}</el-radio>
                   </el-radio-group> -->
-                <li v-for="item in groups.slice(0,7)" :key="item.id" class="wuan_cake_radio">
+                <li v-for="item in groups" :key="item.id" @click="selectGroup(item.id)" class="wuan_cake_radio">
                   <div class="wuan_cake_radio_block">
                       <input type="radio" name="grouping" class="wuan_cake_radio_input" />
                   </div>
@@ -59,18 +59,22 @@ export default {
       ...mapMutations('user', ['setUserInfo']),
       getGroup(){
         group({
-          userId:this.usergroup.userid,
-          groupId:this.usergroup.groupid
+          userId: this.$store.state.user.userInfo.userId,
+          groupId: this.usergroup.groupid
         }).then(res => {
           if(res.data.infoCode != 200){
             alert(res.data.infoText)
           }else{
-             this.setUserInfo(res.data);
-             this.$router.push({
+            this.setUserInfo({ groupId: res.data.groupId });
+            alert(res.data.infoText)
+            this.$router.push({
               path: '/'
             })
           }
         })
+      },
+      selectGroup (groupId) {
+        this.usergroup.groupid = groupId
       }
     }
 }

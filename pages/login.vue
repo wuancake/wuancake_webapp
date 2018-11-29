@@ -25,7 +25,7 @@
 <script>
 import WInput from '../components/WInput'
 import logoUrl from '../static/img/1.jpg'
-import { login } from '../api/index.js'
+import { login, findAllGroupInfo } from '../api/index.js'
 import { mapMutations } from 'vuex';
 export default {
   components: {
@@ -48,7 +48,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('user', ['setUserInfo']),
+    ...mapMutations('user', ['setUserInfo', 'setGroup']),
     toLogin () {
       if (this.emailOk && this.password) {
         this.isVerificationEmail = true
@@ -66,9 +66,20 @@ export default {
           } else {
             alert(res.data.infoText)
             this.setUserInfo(res.data)
-            this.$router.push({
-              path: '/'
-            })
+            if (!res.data.groupId) {
+              this.$router.push({
+                path: '/grouping'
+              })
+            } else {
+              findAllGroupInfo().then(res => {
+                if(res.data.infoCode == 200){
+                  this.setGroup(res.data.groups)
+                  this.$router.push({
+                    path: '/'
+                  })
+                }
+              })
+            }
           }
         })
       } else {
