@@ -88,7 +88,7 @@ export default {
     },
     goLogin(){
       this.$router.push({
-        // path:'/login'
+        path:'/login'
       })
     }
   }
