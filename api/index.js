@@ -24,6 +24,23 @@ export function pushEmail (params = {}) {
   })
 }
 
+
+export function group (params = {}) {
+  return fetch({
+    url: '/group',
+    method: 'post',
+    data: params
+  })
+}
+
+export function findAllGroupInfo (params = {}) {
+  return fetch({
+    url: '/findAllGroupInfo',
+    method: 'post',
+    data: params
+  })
+}
+
 export function changePassword (params = {}) {
   return fetch({
     url: '/updatePassword',

@@ -2,6 +2,7 @@
   <div>
     <button @click="goSignUp">注册</button>
     <button @click="goLogin">登录</button>
+    <button @click="goGrouping">分组</button>
     <button @click="goChnagePassword">修改密码</button>
     <button @click="goSelectGroup">选择分组</button>
   </div>
@@ -21,6 +22,11 @@ export default {
     goLogin () {
       this.$router.push({
         path: '/login'
+      })
+    },
+    goGrouping () {
+      this.$router.push({
+        path: '/grouping'
       })
     },
     goChnagePassword () {
