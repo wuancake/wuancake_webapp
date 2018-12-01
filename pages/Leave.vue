@@ -53,7 +53,7 @@ export default {
       if (checkValue) {
         leave({
           complete: this.complete,
-          weekNum: this.$store.state.user.userInfo.currWeek,
+          weekNum: this.selectValue,
           reason: this.reason,
           userId: this.$store.state.user.userInfo.userId,
           groupId: this.$store.state.user.userInfo.groupId
@@ -62,6 +62,7 @@ export default {
             alert(res.data.infoText)
           } else {
             this.setUserInfo({ status: 3 })
+            alert(res.data.infoText)
             this.$router.push({
               path: '/'
             })
@@ -76,7 +77,7 @@ export default {
       return false
     },
     selectWeekNumber (event) {
-      this.selectValue = event.target.id
+      this.selectValue = Number(event.target.id)
     }
   }
 }
