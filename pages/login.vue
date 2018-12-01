@@ -154,6 +154,7 @@ export default {
 
   .login-bnts
     width 100%
+    outline none
     pageFlexCenter()
 
 .login-btn

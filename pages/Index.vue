@@ -8,14 +8,16 @@
       <p class="count-down-info">{{ groupDate[userInfo.groupId - 1].groupName }}：{{ userInfo.userName }}</p>
     </div>
     <div class="btns">
-      <button @click="goSubmitWeekly" class="push-btn">提交周报</button>
-      <button @click="goLeave" class="push-btn">我要请假</button>
+      <button v-if="userInfo.status == 1" @click="goSubmitWeekly" class="push-btn">提交周报</button>
+      <button v-if="userInfo.status == 1" @click="goLeave" class="push-btn">我要请假</button>
+      <button v-if="userInfo.status == 2 || userInfo.status == 3" @click="myWeekly" class="push-btn">我的周报</button>
+      <button v-if="userInfo.status == 3" @click="cancelLeave" class="push-btn">取消请假</button>
     </div>
   </div>
 </template>
 
 <script>
-import { findAllGroupInfo, queryMain } from '../api/index.js'
+import { findAllGroupInfo, queryMain, cancelLeave } from '../api/index.js'
 import { mapMutations } from 'vuex';
 export default {
   data () {
@@ -76,6 +78,21 @@ export default {
         path: '/leave'
       })
     },
+    cancelLeave () {
+      cancelLeave({
+        userId: this.userInfo.userId,
+        groupId: this.userInfo.groupId
+      }).then(res => {
+        if (res.data.infoCode != 200) {
+          alert(res.data.infoText)
+        } else {
+          this.setUserInfo({
+            status: 1
+          })
+          alert(res.data.infoText)
+        }
+      })
+    },
     getGroupDate () {
       findAllGroupInfo().then(res => {
         if(res.data.infoCode == 200){
@@ -94,6 +111,11 @@ export default {
           this.setUserInfo({ status: res.data.status })
         }
       })
+    },
+    myWeekly () {
+      this.$router.push({
+        path: '/my-weeklys'
+      })
     }
   }
 }
@@ -106,10 +128,11 @@ pushBtn()
 
 .btns
   button
-    &:first-child
+    outline none
+    &:nth-child(odd)
       background-color #1987fc
       margin-bottom 40px
-    &:last-child
+    &:nth-child(even)
       background-color #fff
       box-sizing border-box
       border 1px solid #3e9cff

@@ -7,3 +7,11 @@ export function submitWeekly (params = {}) {
     data: params
   })
 }
+
+export function fetchWeeklys (params = {}) {
+  return fetch({
+    url: '/myweekly',
+    method: 'post',
+    data: params
+  })
+}

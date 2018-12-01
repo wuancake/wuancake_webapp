@@ -11,7 +11,7 @@ import {createRouter} from '@/.lavas/router';
 import {createStore} from '@/.lavas/store';
 import AppComponent from './App.vue';
 
-import 'vue2-animate/dist/vue2-animate.min.css'
+// import 'vue2-animate/dist/vue2-animate.min.css'
 
 Vue.use(Meta);
 

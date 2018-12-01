@@ -64,3 +64,11 @@ export function leave (params = {}) {
     data: params
   })
 }
+
+export function cancelLeave (params = {}) {
+  return fetch({
+    url: '/cancelLeave',
+    method: 'post',
+    data: params
+  })
+}
