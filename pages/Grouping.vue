@@ -2,12 +2,19 @@
     <div class="grouping-page">
         <aside class="wuan_cake_grouping">
             <ul class="wuan_cake_list">
-              <!-- <el-radio-group v-model="curState" @change="curStateChange">
-                    <el-radio v-for="(item,index) in stateGroup" :label="item.code" :key="index">{{ item.name }}</el-radio>
-                  </el-radio-group> -->
-                <li v-for="item in groups" :key="item.id" @click="selectGroup(item.id)" class="wuan_cake_radio">
+                <li 
+                v-for="item in groups" 
+                :key="item.id" 
+                :class="(active == item.id)?'wuan_cake_radio active':'wuan_cake_radio'"
+                @click="selectGroup(item.id)">
+                <!-- 单选圆圈 -->
                   <div class="wuan_cake_radio_block">
-                      <input type="radio" name="grouping" class="wuan_cake_radio_input" />
+                    <div class="wuan_cake_radio_input">
+                      <div class="wuan_cake_radio_inner">
+                        <!-- <input type="radio" name="grouping" class="wuan_cake_radio_input" /> -->
+                      </div>
+                    </div>
+                    
                   </div>
                   <div class="wuan_cake_radio_label">{{ item.groupName }}</div>
                 </li>
@@ -29,6 +36,7 @@ export default {
     name: 'grouping',
      data() {
       return{
+        active:-1,
         usergroup:{
           userid:'',
           groupid:'',
@@ -47,11 +55,10 @@ export default {
       getGriopInfo(){
         findAllGroupInfo({
         }).then(res=>{
-           console.log(res.data);
+          //  console.log(res.data);
           if(res.data.infoCode ==="200"){
             this.groups = res.data.groups;
             
-            console.log(this.groups.length);
           }
         })
       },
@@ -72,9 +79,10 @@ export default {
             })
           }
         })
-      },
+      },  
       selectGroup (groupId) {
-        this.usergroup.groupid = groupId
+        this.usergroup.groupid = groupId;
+        this.active = groupId;
       }
     }
 }
@@ -90,7 +98,6 @@ export default {
     line-height 1
     cursor pointer
     white-space nowrap
-    outline 0
 
 input[type=radio]
     box-sizing border-box
@@ -131,9 +138,20 @@ input[type=radio]
         width 100px
         height 100px
         border-right 1px solid #cecece
+        position relative
+        padding-top 35px
 
-       .wuan_cake_radio_input
-            radio()
+        .wuan_cake_radio_input
+
+          radio()
+
+          .wuan_cake_radio_inner
+            point()
+            margin 0 auto
+        
+    .wuan_cake_radio.active .wuan_cake_radio_inner
+      background-color #2f94ff!important
+    
 
     .wuan_cake_radio_label
         width 100%
