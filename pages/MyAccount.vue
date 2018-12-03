@@ -80,9 +80,9 @@ export default {
           console.log(this.$store.state.user.userInfo)
           console.log(this.$store.state.user.group)
           console.log(this.$store.state.user)
-          // this.$router.push({
-          //   path:'change-password'
-          // })
+          this.$router.push({
+            path:'change-password'
+          })
         },
         showOutGroup(){
             this.showModal = true;

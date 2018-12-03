@@ -8,7 +8,11 @@ export const state = () => {
       groupName: '',
       status: null // 本周是否写周报的状态
     },
-    group: []
+    group: [],
+    login: {
+      email: '',
+      password: ''
+    }
   }
 }
 
@@ -18,5 +22,8 @@ export const mutations = {
   },
   setGroup (state, params) {
     state.group = params
+  },
+  setLogin (state, params) {
+    state.login = { ...state.login, ...params }
   }
 }

@@ -48,13 +48,17 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('user', ['setUserInfo', 'setGroup']),
+    ...mapMutations('user', ['setUserInfo', 'setGroup', 'setLogin']),
     toLogin () {
       if (this.emailOk && this.password) {
         this.isVerificationEmail = true
         this.isVerificationPassword = true
         this.verificationPassword = 0
         this.verificationEamil = 0
+        this.setLogin({
+          email: this.email,
+          password: this.password
+        })
         login({
           email: this.email,
           password: this.password
