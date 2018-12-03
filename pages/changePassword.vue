@@ -22,7 +22,7 @@
 <script>
 import WInput from '../components/WInput'
 import { changePassword } from '../api/index.js'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   components: {
     'w-input': WInput
@@ -43,7 +43,11 @@ export default {
   computed: {
     ...mapState('user', ['userInfo'])
   },
+  created() {
+    this.setTitle('修改密码')
+  },
   methods: {
+    ...mapMutations('user', ['setTitle']),
     push () {
       this.init()
       if (this.password && this.newPassword && this.confirmPasswd && this.newPassword === this.confirmPasswd) {

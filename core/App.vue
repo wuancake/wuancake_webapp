@@ -1,6 +1,10 @@
 <template>
     <div id="app">
-        <w-header title="标题"></w-header>
+        <w-header @on-click-left="tapSet" title="">
+            <span class="header-icon" slot="left">
+                <i class="iconfont">&#xe62b;</i>
+            </span>
+        </w-header>
         <transition
             :name="pageTransitionEffect"
             @before-enter="handleBeforeEnter"
@@ -16,15 +20,17 @@
             </keep-alive>
         </transition>
         <update-toast></update-toast>
+        <w-sidebar :grouping="userInfo.groupName || ''" :username="userInfo.userName || ''" v-if="aside"></w-sidebar>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import {mapState, mapActions} from 'vuex';
+import {mapState, mapActions, mapMutations} from 'vuex';
 import UpdateToast from '@/components/UpdateToast';
 import {keepAlivePages} from '@/.lavas/router';
 import WHeader from '@/components/WHeader'
+import WSidebar from '@/components/WSidebar'
 
 const ENABLE_SCROLL_CLASS = 'app-view-scroll-enabled';
 
@@ -32,7 +38,8 @@ export default {
     name: 'app',
     components: {
         UpdateToast,
-        WHeader
+        WHeader,
+        WSidebar
     },
     computed: {
         ...mapState('pageTransition', {
@@ -42,6 +49,11 @@ export default {
 
         ...mapState('scrollBehavior', {
             scrollPostionMap: state => state.scrollPostionMap
+        }),
+
+        ...mapState('user', {
+            aside: state => state.aside,
+            userInfo: state => state.userInfo
         }),
 
         pageTransitionClass() {
@@ -68,6 +80,7 @@ export default {
         ...mapActions('scrollBehavior', [
             'savePageScrollPosition'
         ]),
+        ...mapMutations('user', ['setAside']),
 
         /**
          * make current page container scrollable,
@@ -110,6 +123,9 @@ export default {
                 pageId,
                 scrollPosition: {y: scrollTop}
             });
+        },
+        tapSet () {
+            this.setAside(!this.aside)
         }
     }
 };
@@ -148,6 +164,10 @@ width: 750px;
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
+}
+
+.header-icon {
+    margin-left 30px
 }
 
 #app

@@ -6,7 +6,7 @@
     <button @click="goMyAccount">我的账号</button>
     <button @click="goChnagePassword">修改密码</button>
     <div class="count-down">
-      <p class="count-down-info">{{ groupDate[userInfo.groupId - 1].groupName }}：{{ userInfo.userName }}</p>
+      <p v-if="userInfo.groupId" class="count-down-info">{{ groupDate[userInfo.groupId - 1].groupName }}：{{ userInfo.userName }}</p>
     </div>
     <div class="btns">
       <button v-if="userInfo.status == 1" @click="goSubmitWeekly" class="push-btn">提交周报</button>
@@ -19,18 +19,19 @@
 
 <script>
 import { findAllGroupInfo, queryMain, cancelLeave } from '../api/index.js'
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 export default {
   data () {
     return {}
   },
   computed: {
-    userInfo () {
-      return this.$store.state.user.userInfo
-    },
-    groupDate () {
-      return this.$store.state.user.group
-    }
+    ...mapState('user', {
+      userInfo: state => state.userInfo,
+      groupDate: state => state.group
+    })
+  },
+  created() {
+    this.setTitle('午安煎饼计划')
   },
   beforeMount() {
     if (this.userInfo.userId && this.groupDate.length > 0) {
@@ -43,7 +44,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('user', ['setGroup', 'setUserInfo']),
+    ...mapMutations('user', ['setGroup', 'setUserInfo', 'setTitle']),
     goSignUp () {
       this.$router.push({
         path: '/sign-up'

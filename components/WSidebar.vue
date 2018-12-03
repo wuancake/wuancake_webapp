@@ -1,25 +1,27 @@
 <template>
-    <div>
-        <aside class="wuan_cake_sidebar">
-            <div class="wuan_cake_sidebar_left">
-                <img class="wuan_cake_portrait" src=""/>
-                <div class="wuan_cake_info">
-                    <span class="wuan_cake_grouping">{{ grouping }}</span>
-                    <span class="wuan_cake_name">{{ username }}</span>
+    <transition name="fade">
+        <div>
+            <aside @click.self="tabSidebar" class="wuan_cake_sidebar">
+                <div class="wuan_cake_sidebar_left">
+                    <img class="wuan_cake_portrait" :src="logoUrl"/>
+                    <div class="wuan_cake_info">
+                        <span v-if="grouping" class="wuan_cake_grouping">{{ grouping }}：</span>
+                        <span v-if="username" class="wuan_cake_name">{{ username }}</span>
+                    </div>
+                    <ul class="wuan_cake_list">
+                        <li @click="jump('/')"><router-link tag="span" to="">首页</router-link></li>
+                        <li @click="jump('/my-weeklys')"><router-link tag="span" to="">我的周报</router-link></li>
+                        <li @click="jump('/my-account')"><router-link tag="span" to="">我的账号</router-link></li>
+                    </ul>
+                    <input @click="leave" class="wuan_btn_abort" type="button" value="退出"/>
                 </div>
-                <ul class="wuan_cake_list">
-                    <li><router-link to="index">首页</router-link></li>
-                    <li><router-link to="">我的周报</router-link></li>
-                    <li><router-link to="">我的账号</router-link></li>
-                </ul>
-                <input class="wuan_btn_abort" type="button" value="退出"/>
-            </div>
-        </aside>
-    </div>
+            </aside>
+        </div>
+    </transition>
 </template>
 
 <script>
-
+import { mapMutations, mapState } from 'vuex';
 export default {
     name: 'sidebar',
     props:{
@@ -30,10 +32,40 @@ export default {
         username:{
             type: String,
             default: '用户名'
+        },
+        logoUrl: {
+            type: String,
+            default: '/static/img/logo.jpg'
         }
     },
+    computed: {
+        ...mapState('user', {
+            aside: state => state.aside,
+            userInfo: state => state.userInfo
+        })
+    },
     methods:{
-
+        ...mapMutations('user', ['setAside', 'clear']),
+        tabSidebar () {
+            this.setAside(!this.aside)
+        },
+        jump (pathValue) {
+            if (!this.userInfo.userId) {
+                this.$router.push({
+                    path: '/login'
+                })
+                return
+            }
+            this.$router.push({
+                path: `${pathValue}`
+            })
+        },
+        leave () {
+            this.$router.push({
+                path: '/login'
+            })
+            this.clear()
+        }
     }
 }
 </script>

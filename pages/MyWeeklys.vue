@@ -43,6 +43,7 @@
 <script>
 import { fetchWeeklys } from '../api/weekly.js'
 import WModal from '../components/WModal'
+import { mapMutations } from 'vuex';
 export default {
   data () {
     return {
@@ -62,10 +63,12 @@ export default {
     }
   },
   created() {
+    this.setTitle('我的周报')
     this.nowWeeklyNumber = this.userInfo.currWeek
     this.fetchWeeklyData(this.nowWeeklyNumber)
   },
   methods: {
+    ...mapMutations('user', ['setTitle']),
     fetchWeeklyData (weekNum) {
       fetchWeeklys({
         userId: this.userInfo.userId,

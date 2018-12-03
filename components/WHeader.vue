@@ -1,11 +1,11 @@
 <template>
-  <div aspectratio w-750-100>
+  <div style="z-index: 9999;" aspectratio w-750-100>
     <div class="wuan_cake_header" aspectratio-content>
       <div @click="tapLeft">
         <slot name="left"></slot>
       </div>
       <div @click="tapTitle" class="wuan_cake_header_title">
-        <slot>{{ title }}</slot>
+        <slot>{{ headerTitle }}</slot>
       </div>
       <div @click="tapRight">
         <slot name="right"></slot>
@@ -24,6 +24,15 @@ export default {
   data () {
     return {
       
+    }
+  },
+  computed: {
+    headerTitle () {
+      if (this.title) {
+        return this.title
+      } else if (this.$store.state.user.title) {
+        return this.$store.state.user.title
+      }
     }
   },
   methods: {

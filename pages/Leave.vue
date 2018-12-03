@@ -46,8 +46,11 @@ export default {
       return this.$store.state.user.group
     }
   },
+  created() {
+    this.setTitle('我要请假')
+  },
   methods: {
-    ...mapMutations('user', ['setUserInfo']),
+    ...mapMutations('user', ['setUserInfo', 'setTitle']),
     submit () {
       let checkValue = this.check()
       if (checkValue) {

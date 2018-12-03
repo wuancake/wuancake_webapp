@@ -12,7 +12,9 @@ export const state = () => {
     login: {
       email: '',
       password: ''
-    }
+    },
+    title: '午安煎饼计划',
+    aside: false, // 控制侧边栏展示
   }
 }
 
@@ -25,5 +27,18 @@ export const mutations = {
   },
   setLogin (state, params) {
     state.login = { ...state.login, ...params }
+  },
+  setTitle (state, params) {
+    state.title = params
+  },
+  setAside (state, params) {
+    state.aside = params
+  },
+  clear (state) {
+    state.userInfo = {}
+    state.group = []
+    state.login = {}
+    state.aside = false
+
   }
 }

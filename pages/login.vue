@@ -47,8 +47,11 @@ export default {
       }
     }
   },
+  created() {
+    this.setTitle('午安煎饼计划')
+  },
   methods: {
-    ...mapMutations('user', ['setUserInfo', 'setGroup', 'setLogin']),
+    ...mapMutations('user', ['setUserInfo', 'setGroup', 'setLogin', 'setTitle']),
     toLogin () {
       if (this.emailOk && this.password) {
         this.isVerificationEmail = true
