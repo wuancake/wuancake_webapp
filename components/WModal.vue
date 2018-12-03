@@ -31,6 +31,9 @@ export default {
   justify-content center
   align-items flex-end
   .modal-main
+    background-color #fff
+    border-top-left-radius 40px
+    border-top-right-radius 40px
     width 100%
     > header
       height 98px

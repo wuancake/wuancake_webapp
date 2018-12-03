@@ -4,6 +4,8 @@ ul
     padding 0
     margin 0
 
+li
+    list-style none
 
 // 头像  begin
 portrait(porSize = 180px)
@@ -29,20 +31,29 @@ mask()
 
 // radio重置 begin
 radio()
-    // opacity: 0;
-    outline: none;
-    z-index: -1;
+    width 30px
+    height 30px
+    border-radius 30px
+    padding-top 6px
+    border 1px solid #4285f4
+    margin 0 auto
     // position: absolute;
     // top: 0;
     // left: 0;
     // right: 0;
     // bottom: 0;
     // margin: 0;
+
+point(bgColor = #fff, size = 14px)
+    width size
+    height size
+    border-radius size
+    background-color bgColor
 // radio重置 end
 
 //login-page顶部间距 和flex布局 begin
 pageFlexCenter(flexDirection = column, alignItems = center,justifyContent = start)
-    display flex
+    display flexDisplay
     flex-direction flexDirection
     align-items alignItems
     justify-content justifyContent

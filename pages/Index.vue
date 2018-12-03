@@ -3,6 +3,7 @@
     <button @click="goSignUp">注册</button>
     <button @click="goLogin">登录</button>
     <button @click="goGrouping">分组</button>
+    <button @click="goMyAccount">我的账号</button>
     <button @click="goChnagePassword">修改密码</button>
     <div class="count-down">
       <p class="count-down-info">{{ groupDate[userInfo.groupId - 1].groupName }}：{{ userInfo.userName }}</p>
@@ -56,6 +57,11 @@ export default {
     goGrouping () {
       this.$router.push({
         path: '/grouping'
+      })
+    },
+    goMyAccount () {
+      this.$router.push({
+        path: '/my-account'
       })
     },
     goChnagePassword () {

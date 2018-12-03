@@ -41,9 +41,25 @@ export function findAllGroupInfo (params = {}) {
   })
 }
 
+export function quitGroup (params = {}) {
+  return fetch({
+    url: '/quitGroup',
+    method: 'post',
+    data: params
+  })
+}
+
 export function changePassword (params = {}) {
   return fetch({
     url: '/updatePassword',
+    method: 'post',
+    data: params
+  })
+}
+
+export function updateUserName (params = {}) {
+  return fetch({
+    url: '/updateUserName',
     method: 'post',
     data: params
   })

@@ -24,7 +24,7 @@
 
 <script>
 import WInput from '../components/WInput'
-import logoUrl from '../static/img/1.jpg'
+import logoUrl from '../static/img/logo.jpg'
 import { login, findAllGroupInfo } from '../api/index.js'
 import { mapMutations } from 'vuex';
 export default {
