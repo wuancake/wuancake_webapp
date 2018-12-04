@@ -4,20 +4,17 @@
             <div class="wuan_cake_sidebar_left">
                 <div class="wuan_cake_info">
                     <img class="wuan_cake_portrait" :src="url"/>
-                    <span v-if="update" class="wuan_cake_name" >
-                        {{ userInfo.userName }}
+                    <span class="wuan_cake_name" >
+                        <!-- 只读昵称 -->
+                        <span v-if="isReadOnly">{{ userInfo.userName }}</span>     <!-- 修改昵称 -->
+                        <input v-else class="stealth-input" @change="userInput" :value="userInfo.userName"/>
                         <i class="iconfont icon-bianjixiugai-copy" @click="updateUserName"/>
-                    </span>
-                    <span v-else class="wuan_cake_name" >
-                        <!-- <input :value="userInfo.userName"/> -->
-                        <w-input :value="user.username" @on-blur="userInput"></w-input>
-                        <i class="iconfont icon-bianjixiugai-copy" @click="changeUserName"/>
                     </span>
                 </div>
                 <ul class="wuan_cake_list">
                     <li>
                         <span><i class="point"/>邮箱</span>
-                        <span class="info"></span>
+                        <span class="info">{{ login.email }}</span>
                     </li>
                     <li>
                         <span><i class="point"/>分组</span>
@@ -51,8 +48,8 @@
 import WInput from '../components/WInput'
 import WModal from '../components/WModal'
 import logoUrl from '../static/img/logo.jpg'
-import { quitGroup } from '../api/index.js'
-import { mapMutations } from 'vuex';
+import { quitGroup, updateUserName } from '../api/index.js'
+import { mapMutations, mapState } from 'vuex';
 
 export default {
     name: 'sidebar',
@@ -60,26 +57,29 @@ export default {
         'w-modal':WModal,
         'w-input': WInput
     },
-    computed: {
-      userInfo () {
-        return this.$store.state.user.userInfo
-      },
+    computed:{
+        ...mapState('user', {
+        userInfo: state => state.userInfo,
+        groupDate: state => state.group,
+        login: state => state.login
+        })
     },
     data(){
         return{
           url:logoUrl,
           showModal:false,
-          update:true,
+          isReadOnly:true,
         }
+    },
+    created() {
+        this.setTitle('我的账号')
     },
     props:{
 
     },
     methods:{
+        ...mapMutations('user', ['setUserInfo', 'setLogin', 'setTitle']),
         goChnagePassword(){
-          console.log(this.$store.state.user.userInfo)
-          console.log(this.$store.state.user.group)
-          console.log(this.$store.state.user)
           this.$router.push({
             path:'change-password'
           })
@@ -87,15 +87,14 @@ export default {
         showOutGroup(){
             this.showModal = true;
         },
-        ...mapMutations('user', ['setUserInfo']),
+        // 退出分组
         handOutGroup(){
             quitGroup({
                 id:this.$store.state.user.userInfo.userId
             }).then(res => {
                 if(res.data.infoCode == 200){
                     alert(res.data.infoText)
-                    debugger
-                    console.log(this.$store.state.user.group,11111)
+
                     this.showModal = false;
                     // 退出分组返回登录页
                     this.$router.push({
@@ -112,25 +111,27 @@ export default {
         },
         userInput(event){
           this.$store.state.user.userInfo.userName = event.target.value;
-          console.log(this.user.username)
         },
+        // 修改昵称
         updateUserName(){
-          this.update = !this.update
-        },
-        changeUserName(){
-
-          updateUserName({
-            id:this.$store.state.user.userInfo.userId,
-            userName:userInfo.userName
-          }).then(res => {
-            if (res.data.infoCode === 200) {
-              alert(res.data.infoText);
-              console.log(userInfo.userName,111)
-            }else{
-              alert(res.data.infoText);
-              console.log(userInfo.userName,222)
+          console.log(this.$store.state.user.login.email)
+          if (this.isReadOnly === true) {
+              this.isReadOnly = !this.isReadOnly;
+              
+          } else if(this.isReadOnly === false){
+            // debugger
+            updateUserName({
+                id:this.$store.state.user.userInfo.userId,
+                userName:this.$store.state.user.userInfo.userName
+            }).then(res => {
+                if (res.data.infoCode === 200) {
+                    alert(res.data.infoText);
+                }else{
+                    alert(res.data.infoText);
             }
-          })   
+            })   
+            this.isReadOnly = !this.isReadOnly;
+          }
         }
     }
 }
