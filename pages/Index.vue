@@ -5,6 +5,7 @@
     <button @click="goGrouping">分组</button>
     <button @click="goMyAccount">我的账号</button>
     <button @click="goChnagePassword">修改密码</button>
+    <button @click="showToast">show toast</button>
 
   <div class="homepage">
     <div class="timeboxout  ball">
@@ -145,12 +146,12 @@ export default {
         groupId: this.userInfo.groupId
       }).then(res => {
         if (res.data.infoCode != 200) {
-          alert(res.data.infoText)
+          this.$toast(res.data.infoText)
         } else {
           this.setUserInfo({
             status: 1
           })
-          alert(res.data.infoText)
+          this.$toast(res.data.infoText)
         }
       })
     },
@@ -167,7 +168,7 @@ export default {
         userId: this.userInfo.userId
       }).then(res => {
         if (res.data.infoCode != 200) {
-          alert(res.data.infoText)
+          this.$toast(res.data.infoText)
         } else {
           this.setUserInfo({ status: res.data.status })
         }
@@ -177,6 +178,9 @@ export default {
       this.$router.push({
         path: '/my-weeklys'
       })
+    },
+    showToast () {
+      this.$toast('show toast show toast show toast show toast show toast show toast show toast ')
     }
   }
 }

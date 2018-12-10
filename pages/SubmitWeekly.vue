@@ -67,9 +67,9 @@ export default {
         }).then(res => {
           console.log(res)
           if (res.data.infoCode != 200) {
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
           } else {
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
             this.setUserInfo({ status: 2 })
             this.$router.push({
               path: '/'
@@ -98,6 +98,8 @@ pushBtn()
   box-sizing border-box
   font-size 32px
   font-weight bold
+  overflow auto
+  -webkit-overflow-scrolling touch
   .submit-weekly-item
     width 100%
     margin-bottom 47px

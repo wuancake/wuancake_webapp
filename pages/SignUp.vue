@@ -115,11 +115,11 @@ export default {
         }).then(res =>{
           console.log(res.data)
           if(res.data.infoCode != 200){
-            alert(res.data.infoText);
+            this.$toast(res.data.infoText);
              console.log(22222)
           }
           else{
-            alert(res.data.infoText);
+            this.$toast(res.data.infoText);
             console.log(111)
             this.$router.push({
               path: '/login'

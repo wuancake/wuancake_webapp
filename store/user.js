@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 export const state = () => {
   return {
     userInfo: {
@@ -20,13 +22,18 @@ export const state = () => {
 
 export const mutations = {
   setUserInfo (state, params) {
-    state.userInfo = { ...state.userInfo, ...params }
+    const data = { ...state.userInfo, ...params }
+    state.userInfo = data
+    Vue.localStorage.set('userInfo', JSON.stringify(data))
   },
   setGroup (state, params) {
     state.group = params
+    Vue.localStorage.set('userInfo', JSON.stringify(params))
   },
   setLogin (state, params) {
-    state.login = { ...state.login, ...params }
+    const data = { ...state.login, ...params }
+    state.login = data
+    Vue.localStorage.set('login', JSON.stringify(data))
   },
   setTitle (state, params) {
     state.title = params
@@ -39,6 +46,7 @@ export const mutations = {
     state.group = []
     state.login = {}
     state.aside = false
-
+    Vue.localStorage.remove('userInfo')
+    Vue.localStorage.remove('login')
   }
 }

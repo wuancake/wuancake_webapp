@@ -62,7 +62,7 @@ export default {
   color #fff
   display flex
   align-items center
-  position absolute
+  position fixed
   z-index 9999
   box-shadow 1px 2px 3px rgba(74, 161, 255, 0.84)
   .wuan_cake_header_title

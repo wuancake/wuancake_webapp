@@ -93,7 +93,7 @@ export default {
                 id:this.$store.state.user.userInfo.userId
             }).then(res => {
                 if(res.data.infoCode == 200){
-                    alert(res.data.infoText)
+                    this.$toast(res.data.infoText)
 
                     this.showModal = false;
                     // 退出分组返回登录页
@@ -101,7 +101,7 @@ export default {
                         path:'/login'
                     })
                 }else{
-                    alert(res.data.infoText)
+                    this.$toast(res.data.infoText)
                     this.showModal = false;
                     this.$router.push({
                         path:'/login'
@@ -125,9 +125,9 @@ export default {
                 userName:this.$store.state.user.userInfo.userName
             }).then(res => {
                 if (res.data.infoCode === 200) {
-                    alert(res.data.infoText);
+                    this.$toast(res.data.infoText);
                 }else{
-                    alert(res.data.infoText);
+                    this.$toast(res.data.infoText);
             }
             })   
             this.isReadOnly = !this.isReadOnly;

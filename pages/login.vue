@@ -69,9 +69,9 @@ export default {
           console.log(res)
           if (res.data.infoCode != 200) {
             // TODO: 全局消息提醒
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
           } else {
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
             this.setUserInfo(res.data)
             if (!res.data.groupId) {
               this.$router.push({

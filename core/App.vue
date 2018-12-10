@@ -188,6 +188,7 @@ width: 750px;
         left 0
         -webkit-overflow-scrolling touch
         background white
+        box-sizing border-box
 
         &::-webkit-scrollbar
             width 0

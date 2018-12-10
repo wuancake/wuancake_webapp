@@ -70,10 +70,10 @@ export default {
           groupId: this.usergroup.groupid
         }).then(res => {
           if(res.data.infoCode != 200){
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
           }else{
             this.setUserInfo({ groupId: res.data.groupId });
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
             this.$router.push({
               path: '/'
             })

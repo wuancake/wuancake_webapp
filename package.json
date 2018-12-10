@@ -32,6 +32,7 @@
         "postcss-url": "^8.0.0",
         "postcss-viewport-units": "^0.1.4",
         "postcss-write-svg": "^3.0.1",
+        "vue-localstorage": "^0.6.2",
         "vue2-animate": "^2.1.0"
     },
     "devDependencies": {

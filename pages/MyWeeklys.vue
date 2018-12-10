@@ -77,7 +77,7 @@ export default {
         weekNum: 1
       }).then(res => {
         if (res.data.infoCode) {
-          alert(res.data.infoText)
+          this.$toast(res.data.infoText)
         } else {
           this.weeklys = res.data.reports[0]
         }

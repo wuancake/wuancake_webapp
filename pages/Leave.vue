@@ -62,10 +62,10 @@ export default {
           groupId: this.$store.state.user.userInfo.groupId
         }).then(res => {
           if (res.data.infoCode != 200) {
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
           } else {
             this.setUserInfo({ status: 3 })
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
             this.$router.push({
               path: '/'
             })

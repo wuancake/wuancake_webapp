@@ -59,6 +59,7 @@ export default {
             this.$router.push({
                 path: `${pathValue}`
             })
+            this.tabSidebar()
         },
         leave () {
             this.$router.push({

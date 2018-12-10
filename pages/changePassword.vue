@@ -59,12 +59,12 @@ export default {
         }).then(res => {
           console.log(res)
           if (res.data.infoCode == 200) {
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
             this.$router.push({
               path: '/login'
             })
           } else {
-            alert(res.data.infoText)
+            this.$toast(res.data.infoText)
           }
         })
       } else {
