@@ -204,11 +204,13 @@ export default {
     margin-bottom ($input-bottomGap*3)
   p
     margin 0
-    position absolute
-    font-size 12px
+    width 540px
+    font-size 20px
     color red
     height ($input-bottomGap * 1.5)
     line-height ($input-bottomGap * 1.5)
     box-sizing border-box
     padding-left 40px
+    display inline-block
+    text-align left 
 </style>

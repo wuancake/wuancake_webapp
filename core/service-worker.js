@@ -43,3 +43,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 //         ]
 //     })
 // );
+
+// Define runtime cache.
+workbox.routing.registerRoute(/^http:\/\/13\.125\.249\.52:8008\//,
+    workbox.strategies.networkFirst());
