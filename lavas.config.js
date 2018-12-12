@@ -48,6 +48,11 @@ module.exports = {
             transitionClass: 'fade'
         }
     },
+    middleware: {
+        all: [], // 前后端均执行
+        server: [], // 仅服务器端执行
+        client: ['router-guard']  // 仅浏览器端执行
+    },
     serviceWorker: {
         // If true, generate service-worker.js and sw-register.js
         // Default to `false`

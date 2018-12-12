@@ -1,19 +1,22 @@
 import Vue from 'vue'
 
 export const state = () => {
+  const userInfo = JSON.parse(Vue.localStorage.get('userInfo'))
+  const group = JSON.parse(Vue.localStorage.get('group'))
+  const login = JSON.parse(Vue.localStorage.get('login'))
   return {
     userInfo: {
-      userId: null,
-      userName: '',
-      currWeek: null, // 当前周数
-      groupId: null,
-      groupName: '',
-      status: null // 本周是否写周报的状态
+      userId: userInfo ? userInfo.userId : null,
+      userName: userInfo ? userInfo.userName : '',
+      currWeek: userInfo ? userInfo.currWeek : null, // 当前周数
+      groupId: userInfo ? userInfo.groupId : null,
+      groupName: userInfo ? userInfo.groupName : '',
+      status: userInfo ? userInfo.status : null // 本周是否写周报的状态
     },
-    group: [],
+    group: group ? group : [],
     login: {
-      email: '',
-      password: ''
+      email: login ? login.email : '',
+      password: login ? login.password : ''
     },
     title: '午安煎饼计划',
     aside: false, // 控制侧边栏展示
@@ -28,7 +31,7 @@ export const mutations = {
   },
   setGroup (state, params) {
     state.group = params
-    Vue.localStorage.set('userInfo', JSON.stringify(params))
+    Vue.localStorage.set('group', JSON.stringify(params))
   },
   setLogin (state, params) {
     const data = { ...state.login, ...params }
@@ -47,6 +50,7 @@ export const mutations = {
     state.login = {}
     state.aside = false
     Vue.localStorage.remove('userInfo')
+    Vue.localStorage.remove('group')
     Vue.localStorage.remove('login')
   }
 }

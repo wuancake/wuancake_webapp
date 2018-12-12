@@ -10,7 +10,7 @@
     <w-ball/>
 
     <div class="count-down">
-      <p v-if="userInfo.groupId" class="count-down-info">{{ groupDate[userInfo.groupId - 1].groupName }}：{{ userInfo.userName }}</p>
+      <p v-if="userInfo.groupId" class="count-down-info">{{ userInfo.groupName }}：{{ userInfo.userName }}</p>
     </div>
     <div class="btns">
       <button v-if="userInfo.status == 1" @click="goSubmitWeekly" class="push-btn">提交周报</button>
@@ -42,13 +42,9 @@ export default {
     this.setTitle('午安煎饼计划')
   },
   beforeMount() {
-    if (this.userInfo.userId && this.groupDate.length > 0) {
+    if (this.userInfo.userId) {
       this.getGroupDate()
       this.getMainData()
-    } else {
-      this.$router.push({
-        path: '/login'
-      })
     }
   },
   methods: {

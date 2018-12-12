@@ -2,134 +2,134 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
     
-import _15444507257329d49a922ebc8a6d77ca82c0a74289b98 from '@/pages/Appshell.vue';
+import _15445415860869d49a922ebc8a6d77ca82c0a74289b98 from '@/pages/Appshell.vue';
     
 
     
-import _15444507257329c9f839430bb8a7a81a1878def5842a9 from '@/pages/changePassword.vue';
+import _15445415860869c9f839430bb8a7a81a1878def5842a9 from '@/pages/changePassword.vue';
     
 
     
-import _1544450725732d2462dcf0c7beccd286c658e08187914 from '@/pages/Error.vue';
+import _1544541586086d2462dcf0c7beccd286c658e08187914 from '@/pages/Error.vue';
     
 
     
-import _15444507257321fc08f066f41b27b30ecbed1bda422e7 from '@/pages/forgetPassword.vue';
+import _15445415860861fc08f066f41b27b30ecbed1bda422e7 from '@/pages/forgetPassword.vue';
     
 
     
-import _15444507257327e956ff74231425712aa6ee1ebe29619 from '@/pages/Grouping.vue';
+import _15445415860867e956ff74231425712aa6ee1ebe29619 from '@/pages/Grouping.vue';
     
 
     
-import _154445072573267830448037326425509e44bce7632b7 from '@/pages/Index.vue';
+import _154454158608667830448037326425509e44bce7632b7 from '@/pages/Index.vue';
     
 
     
-import _154445072573267c7fac9d0314ab40632ee4454b0fdcd from '@/pages/Leave.vue';
+import _154454158608667c7fac9d0314ab40632ee4454b0fdcd from '@/pages/Leave.vue';
     
 
     
-import _15444507257328df541b53e4cb5088c52e8d2c73e2b09 from '@/pages/login.vue';
+import _15445415860868df541b53e4cb5088c52e8d2c73e2b09 from '@/pages/login.vue';
     
 
     
-import _1544450725732e1315ac79c3d658948d0cb3bf721193c from '@/pages/MyAccount.vue';
+import _1544541586086e1315ac79c3d658948d0cb3bf721193c from '@/pages/MyAccount.vue';
     
 
     
-import _15444507257327eef68d30e467d2b7171ca1becf1a6c0 from '@/pages/MyWeeklys.vue';
+import _15445415860867eef68d30e467d2b7171ca1becf1a6c0 from '@/pages/MyWeeklys.vue';
     
 
     
-import _15444507257321fd767d722abb005d4803b600464a204 from '@/pages/OldIndex.vue';
+import _15445415860861fd767d722abb005d4803b600464a204 from '@/pages/OldIndex.vue';
     
 
     
-import _1544450725732c5f19d99e92dfb5fd429cf8a19b0b5d5 from '@/pages/SignUp.vue';
+import _1544541586086c5f19d99e92dfb5fd429cf8a19b0b5d5 from '@/pages/SignUp.vue';
     
 
     
-import _154445072573291bf2e35394f7ea75808a659f2014e2c from '@/pages/SubmitWeekly.vue';
+import _154454158608691bf2e35394f7ea75808a659f2014e2c from '@/pages/SubmitWeekly.vue';
     
 
 
 let routes = [
     {
         "path": "/appshell",
-        "component": _15444507257329d49a922ebc8a6d77ca82c0a74289b98,
+        "component": _15445415860869d49a922ebc8a6d77ca82c0a74289b98,
         "meta": {},
         "name": "appshell"
     },
     {
         "path": "/change-password",
-        "component": _15444507257329c9f839430bb8a7a81a1878def5842a9,
+        "component": _15445415860869c9f839430bb8a7a81a1878def5842a9,
         "meta": {},
         "name": "changePassword"
     },
     {
         "path": "/forget-password",
-        "component": _15444507257321fc08f066f41b27b30ecbed1bda422e7,
+        "component": _15445415860861fc08f066f41b27b30ecbed1bda422e7,
         "meta": {},
         "name": "forgetPassword"
     },
     {
         "path": "/grouping",
-        "component": _15444507257327e956ff74231425712aa6ee1ebe29619,
+        "component": _15445415860867e956ff74231425712aa6ee1ebe29619,
         "meta": {},
         "name": "grouping"
     },
     {
         "path": "/",
-        "component": _154445072573267830448037326425509e44bce7632b7,
+        "component": _154454158608667830448037326425509e44bce7632b7,
         "meta": {},
         "name": "index"
     },
     {
         "path": "/leave",
-        "component": _154445072573267c7fac9d0314ab40632ee4454b0fdcd,
+        "component": _154454158608667c7fac9d0314ab40632ee4454b0fdcd,
         "meta": {},
         "name": "leave"
     },
     {
         "path": "/login",
-        "component": _15444507257328df541b53e4cb5088c52e8d2c73e2b09,
+        "component": _15445415860868df541b53e4cb5088c52e8d2c73e2b09,
         "meta": {},
         "name": "login"
     },
     {
         "path": "/my-account",
-        "component": _1544450725732e1315ac79c3d658948d0cb3bf721193c,
+        "component": _1544541586086e1315ac79c3d658948d0cb3bf721193c,
         "meta": {},
         "name": "myAccount"
     },
     {
         "path": "/my-weeklys",
-        "component": _15444507257327eef68d30e467d2b7171ca1becf1a6c0,
+        "component": _15445415860867eef68d30e467d2b7171ca1becf1a6c0,
         "meta": {},
         "name": "myWeeklys"
     },
     {
         "path": "/old-index",
-        "component": _15444507257321fd767d722abb005d4803b600464a204,
+        "component": _15445415860861fd767d722abb005d4803b600464a204,
         "meta": {},
         "name": "oldIndex"
     },
     {
         "path": "/sign-up",
-        "component": _1544450725732c5f19d99e92dfb5fd429cf8a19b0b5d5,
+        "component": _1544541586086c5f19d99e92dfb5fd429cf8a19b0b5d5,
         "meta": {},
         "name": "signUp"
     },
     {
         "path": "/submit-weekly",
-        "component": _154445072573291bf2e35394f7ea75808a659f2014e2c,
+        "component": _154454158608691bf2e35394f7ea75808a659f2014e2c,
         "meta": {},
         "name": "submitWeekly"
     },
     {
         "path": "/error",
-        "component": _1544450725732d2462dcf0c7beccd286c658e08187914,
+        "component": _1544541586086d2462dcf0c7beccd286c658e08187914,
         "meta": {},
         "name": "error",
         "alias": "*"

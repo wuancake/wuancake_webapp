@@ -9,7 +9,16 @@ import {stringify} from 'querystring';
 
 export async function getMiddlewares(names) {
     
-    return {};
+    let middlewares = {};
+    try {
+        await Promise.all(names.map(async name => {
+            middlewares[name] = (await import('@/middlewares/' + name + '.js')).default;
+        }));
+        return middlewares;
+    }
+    catch (e) {
+        console.log('[Lavas] fail to import middleware: ', e);
+    }
     
 }
 
