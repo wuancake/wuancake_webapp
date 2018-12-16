@@ -7,7 +7,7 @@
     <button @click="goChnagePassword">修改密码</button>
     <button @click="showToast">show toast</button>
 
-    <w-ball/>
+    <w-ball :type="ball.type" />
 
     <div class="count-down">
       <p v-if="userInfo.groupId" class="count-down-info">{{ userInfo.groupName }}：{{ userInfo.userName }}</p>
@@ -27,7 +27,11 @@ import { mapMutations, mapState } from 'vuex';
 import WBall from '../components/WBall';
 export default {
   data () {
-    return {}
+    return {
+      ball:{
+        type:'w', 
+      }
+    }
   },
   components:{
     'w-ball':WBall
@@ -38,20 +42,22 @@ export default {
       groupDate: state => state.group
     })
   },
+  // 标题
   created() {
-    this.setTitle('午安煎饼计划')
+    this.setTitle('午安煎饼计划');
   },
   beforeMount() {
     if (this.userInfo.userId) {
-      this.getGroupDate()
-      this.getMainData()
+      this.getGroupDate();
+      this.getMainData();
     }
   },
+  mounted(){
+    
+  },
   methods: {
-    residueTime(){
-      var newtime = new Date();
-    },
     ...mapMutations('user', ['setGroup', 'setUserInfo', 'setTitle']),
+    // 页面跳转
     goSignUp () {
       this.$router.push({
         path: '/sign-up'
@@ -92,45 +98,62 @@ export default {
         path: '/leave'
       })
     },
+    // 取消请假
     cancelLeave () {
       cancelLeave({
         userId: this.userInfo.userId,
         groupId: this.userInfo.groupId
       }).then(res => {
         if (res.data.infoCode != 200) {
-          this.$toast(res.data.infoText)
+          this.$toast(res.data.infoText);
         } else {
           this.setUserInfo({
             status: 1
           })
-          this.$toast(res.data.infoText)
+          this.ball.type="w";
+          this.$toast(res.data.infoText);
         }
       })
     },
+    // 得到群组信息
     getGroupDate () {
       findAllGroupInfo().then(res => {
         if(res.data.infoCode == 200){
-          this.groups = res.data.groups
-          this.setGroup(res.data.groups)
+          this.groups = res.data.groups;
+          this.setGroup(res.data.groups);
         }
       })
     },
-    getMainData () {
+    // 首页
+    getMainData(){
       queryMain({
         userId: this.userInfo.userId
       }).then(res => {
         if (res.data.infoCode != 200) {
-          this.$toast(res.data.infoText)
+          this.$toast(res.data.infoText);
         } else {
-          this.setUserInfo({ status: res.data.status })
+          // 成功返回状态码：1表示未提交，2表示已提交，3表示已请假 
+          this.setUserInfo({ status: res.data.status });
+          switch (res.data.status) {
+            case 1:
+              this.ball.type="w";
+              break;
+            case 2:
+              this.ball.type="complete";
+              break;
+            case 3:
+              this.ball.type="leave";
+          }
         }
       })
     },
+    // 我的周报
     myWeekly () {
       this.$router.push({
         path: '/my-weeklys'
       })
     },
+    // 黑色提示框
     showToast () {
       this.$toast('show toast show toast show toast show toast show toast show toast show toast ')
     }
