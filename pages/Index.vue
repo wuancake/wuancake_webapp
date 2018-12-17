@@ -7,7 +7,10 @@
     <button @click="goChnagePassword">修改密码</button>
     <button @click="showToast">show toast</button>
 
-    <w-ball :type="ball.type" />
+    <w-ball 
+      :type="ball.type" 
+      :isCountdown="ball.isCountdown" 
+      :instructions="ball.instructions"/>
 
     <div class="count-down">
       <p v-if="userInfo.groupId" class="count-down-info">{{ userInfo.groupName }}：{{ userInfo.userName }}</p>
@@ -30,7 +33,10 @@ export default {
     return {
       ball:{
         type:'w', 
-      }
+        isCountdown:true,
+        instructions:''
+      },
+      instructions_:['本周剩余时间','本周已提交','本周已请假']
     }
   },
   components:{
@@ -110,8 +116,9 @@ export default {
           this.setUserInfo({
             status: 1
           })
-          this.ball.type="w";
           this.$toast(res.data.infoText);
+          console.log(this.userInfo.status)
+          this.typeJudge(this.userInfo.status);
         }
       })
     },
@@ -134,16 +141,7 @@ export default {
         } else {
           // 成功返回状态码：1表示未提交，2表示已提交，3表示已请假 
           this.setUserInfo({ status: res.data.status });
-          switch (res.data.status) {
-            case 1:
-              this.ball.type="w";
-              break;
-            case 2:
-              this.ball.type="complete";
-              break;
-            case 3:
-              this.ball.type="leave";
-          }
+          this.typeJudge(res.data.status);
         }
       })
     },
@@ -152,6 +150,27 @@ export default {
       this.$router.push({
         path: '/my-weeklys'
       })
+    },
+    typeJudge(val){
+      switch (val) {
+        case 1:
+          this.ball.type= "w";
+          this.ball.isCountdown=true;
+          this.ball.instructions = this.instructions_[0];
+          break;
+
+        case 2:
+          this.ball.type="complete";
+          this.ball.isCountdown=false;
+          this.ball.instructions = this.instructions_[1];
+          break;
+
+        case 3:
+          this.ball.type="leave";
+          this.ball.isCountdown=false;
+          this.ball.instructions = this.instructions_[2];
+        break;
+      }
     },
     // 黑色提示框
     showToast () {
@@ -180,6 +199,10 @@ pushBtn()
 
 .count-down-info
   font-size 28px
+  margin-bottom  50px
   color #828282
+
+.homepage
+  margin-top 100px
 
 </style>

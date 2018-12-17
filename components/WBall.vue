@@ -9,7 +9,7 @@
           <div class="box">
             <div class="percent">
               <p id="prompt1">{{ time.week }}</p>
-              <p id="prompt2">{{ time.instructions }}</p>
+              <p id="prompt2">{{ instructions }}</p>
               <p id="prompt3" v-show="isCountdown">{{ time.countdown }}</p>
             </div>
             
@@ -53,49 +53,41 @@ export default {
   props:{
     // 进度球类型：未完成，请假，完成
     type:{
+      require: false,
       type:String,
-      defaule:'w',
-      validator:val => ['w','complete','leave'].indexOf(val) > -1
+      defaule:''
+    },
+    isCountdown:{
+      require: false,
+      type:Boolean,
+      defaule:true
+    },
+    instructions:{
+      require: false,
+      type: String,
+      default:''
     }
   },
    data () {
     return {
       status:'',
-      isCountdown:true,
       time:{
         week:'',
-        instructions:'',
         countdown:''
       }
     }
   },
-  watch:{},
+  watch:{
+    
+  },
   computed: {},
   created(){},
   mounted(){
-    this.ballText();
     setInterval(()=>{this.residueTime(), 1000});
     this.outi();
     this.weeknum();
   },
   methods:{
-    // 类型判断文字输出
-    ballText(){
-      switch (this.type) {
-        case "w":
-          this.time.instructions="本周剩余时间";
-          this.isCountdown=true;
-          break;
-        case "complete":
-          this.time.instructions="本周已提交";
-          this.isCountdown=false;
-          break;
-        case "leave":
-          this.time.instructions="本周已请假";
-          this.isCountdown=false;
-          break;
-      }
-    },
     weeknum(){
       // 获取当前时间
       let currentTime = new Date();
@@ -133,22 +125,17 @@ export default {
       water.style.transform = 'translate(0' + ',' + (100 - timeRate) + '%)';
 
       if (timeRate === 0  || this.type === 'leave' || this.type === 'complete') {
-        console.log(0);
           document.getElementsByTagName("svg")[0].innerHTML = "";
           document.getElementsByTagName("svg")[1].innerHTML = "";
         }
       else if(timeRate >50) {
         this.status = "w";
-        console.log('w',11)
-
       }
       else if(timeRate <= 50 && timeRate > 20) {
         this.status = "w50";
-        console.log('w50',22)
       }
       else{
         this.status = "w20";
-        console.log('w20',333)
       }
 
     },
@@ -216,8 +203,8 @@ export default {
   left 50%
   transform translateX(-50%)
   height 100%
+  line-height 0.5
   width 100%
-
 /*.homepage p{margin-bottom: 0.5625rem;}*/
 #prompt1
   font-size 1.1875rem
@@ -266,7 +253,10 @@ export default {
   & .timeboxmiddle
     background -webkit-linear-gradient(top,#ffffff,#8ca1d1)
   & .percent
+    padding:60px
     color #8ca1d1
+  & #prompt2
+    font-size 1.1875rem
   & .water
     background #fff
   & .water_wave_back
@@ -281,7 +271,10 @@ export default {
   & .timeboxmiddle
     background -webkit-linear-gradient(top,#ffffff,#34a853)
   & .percent
+    padding:60px
     color #34a853
+  & #prompt2
+    font-size 1.1875rem
   & .water
     background #fff
   & .water_wave_back
@@ -295,8 +288,10 @@ export default {
     border 1px solid #2edb75
   & .timeboxmiddle
     background -webkit-linear-gradient(top,#ffffff,#2edb75)
-  // & .percent
-  //   color #2edb75
+  & .percent
+    padding:30px
+  & #prompt2
+    font-size 12px
   & .water
     background #2edb75
   & .water_wave_back
@@ -310,8 +305,8 @@ export default {
     border 1px solid #fbbc05
   & .timeboxmiddle
     background -webkit-linear-gradient(top,#ffffff,#fbbc05)
-  // & .percent
-  //   color #ffd762
+  & .percent
+    padding:30px
   & .water
     background #fbbc05
   & .water_wave_back
@@ -325,8 +320,8 @@ export default {
     border 1px solid #fe6c0d
   & .timeboxmiddle
     background -webkit-linear-gradient(top,#ffffff,#fe6c0d)
-  // & .percent
-  //   color #fe6c0d
+  & .percent
+    padding:30px
   & .water
     background #fe6c0d
   & .water_wave_back
