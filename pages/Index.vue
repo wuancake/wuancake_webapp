@@ -7,56 +7,10 @@
     <button @click="goChnagePassword">修改密码</button>
     <button @click="showToast">show toast</button>
 
-  <div class="homepage">
-    <div class="timeboxout  ball">
-      <div class="timeboxmiddle ball">
-        <div class="timeboxin">
-          <div class="box">
-            <div class="percent">
-              <p id="prompt1">第<span id="nw"></span>周</p>
-              <p id="prompt2">本周剩余时间</p>
-              <p id="prompt3">
-                <!-- JS获取时间信息 -->
-
-                <span id="days"></span>
-                <span id="hours"></span>
-                <span id="minutes"></span>
-                <span id="seconds"></span>
-              </p>
-            </div>
-            
-            <div id="water" class="water ball"> <!-- 最底层水量 -->
-            <!-- 后面的水波 -->
-              <svg viewBox="0 0 560 20" class="water_wave water_wave_back ball">
-                <use xlink:href="#wave"></use>
-              </svg>
-              <!-- 水波前面的波浪 -->
-              <svg viewBox="0 0 560 20" class="water_wave water_wave_front ball">
-                <use xlink:href="#wave"></use>
-              </svg>
-            </div>
-        </div>
-      </div>
-    </div>
- </div>
-<!-- SVG波浪瞄点 -->
-
-    <svg version="1.1" x="0px" y="0px" style="display: none;">
-      <symbol id="wave">
-        <path d="M420,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,
-                27.3-5.4C514,6.5,518,4.7,528.5,2.7c7.1-1.3,17.9-2.8,
-                31.5-2.7c0,0,0,0,0,0v20H420z"></path>
-        <path d="M420,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C326,
-                6.5,322,4.7,311.5,2.7C304.3,1.4,293.6-0.1,280,0c0,0,0,0,0,0v20H420z"></path>
-        <path d="M140,20c21.5-0.4,38.8-2.5,51.1-4.5c13.4-2.2,26.5-5.2,
-                27.3-5.4C234,6.5,238,4.7,248.5,2.7c7.1-1.3,17.9-2.8,
-                31.5-2.7c0,0,0,0,0,0v20H140z"></path>
-        <path d="M140,20c-21.5-0.4-38.8-2.5-51.1-4.5c-13.4-2.2-26.5-5.2-27.3-5.4C46,
-                6.5,42,4.7,31.5,2.7C24.3,1.4,13.6-0.1,0,0c0,0,0,0,0,0l0,20H140z"></path>
-      </symbol>
-    </svg>
-</div>
-
+    <w-ball 
+      :type="ball.type" 
+      :isCountdown="ball.isCountdown" 
+      :instructions="ball.instructions"/>
 
     <div class="count-down">
       <p v-if="userInfo.groupId" class="count-down-info">{{ userInfo.groupName }}：{{ userInfo.userName }}</p>
@@ -73,9 +27,20 @@
 <script>
 import { findAllGroupInfo, queryMain, cancelLeave } from '../api/index.js'
 import { mapMutations, mapState } from 'vuex';
+import WBall from '../components/WBall';
 export default {
   data () {
-    return {}
+    return {
+      ball:{
+        type:'w', 
+        isCountdown:true,
+        instructions:''
+      },
+      instructions_:['本周剩余时间','本周已提交','本周已请假']
+    }
+  },
+  components:{
+    'w-ball':WBall
   },
   computed: {
     ...mapState('user', {
@@ -83,17 +48,22 @@ export default {
       groupDate: state => state.group
     })
   },
+  // 标题
   created() {
-    this.setTitle('午安煎饼计划')
+    this.setTitle('午安煎饼计划');
   },
   beforeMount() {
     if (this.userInfo.userId) {
-      this.getGroupDate()
-      this.getMainData()
+      this.getGroupDate();
+      this.getMainData();
     }
+  },
+  mounted(){
+    
   },
   methods: {
     ...mapMutations('user', ['setGroup', 'setUserInfo', 'setTitle']),
+    // 页面跳转
     goSignUp () {
       this.$router.push({
         path: '/sign-up'
@@ -134,45 +104,75 @@ export default {
         path: '/leave'
       })
     },
+    // 取消请假
     cancelLeave () {
       cancelLeave({
         userId: this.userInfo.userId,
         groupId: this.userInfo.groupId
       }).then(res => {
         if (res.data.infoCode != 200) {
-          this.$toast(res.data.infoText)
+          this.$toast(res.data.infoText);
         } else {
           this.setUserInfo({
             status: 1
           })
-          this.$toast(res.data.infoText)
+          this.$toast(res.data.infoText);
+          console.log(this.userInfo.status)
+          this.typeJudge(this.userInfo.status);
         }
       })
     },
+    // 得到群组信息
     getGroupDate () {
       findAllGroupInfo().then(res => {
         if(res.data.infoCode == 200){
-          this.groups = res.data.groups
-          this.setGroup(res.data.groups)
+          this.groups = res.data.groups;
+          this.setGroup(res.data.groups);
         }
       })
     },
-    getMainData () {
+    // 首页
+    getMainData(){
       queryMain({
         userId: this.userInfo.userId
       }).then(res => {
         if (res.data.infoCode != 200) {
-          this.$toast(res.data.infoText)
+          this.$toast(res.data.infoText);
         } else {
-          this.setUserInfo({ status: res.data.status })
+          // 成功返回状态码：1表示未提交，2表示已提交，3表示已请假 
+          this.setUserInfo({ status: res.data.status });
+          this.typeJudge(res.data.status);
         }
       })
     },
+    // 我的周报
     myWeekly () {
       this.$router.push({
         path: '/my-weeklys'
       })
     },
+    typeJudge(val){
+      switch (val) {
+        case 1:
+          this.ball.type= "w";
+          this.ball.isCountdown=true;
+          this.ball.instructions = this.instructions_[0];
+          break;
+
+        case 2:
+          this.ball.type="complete";
+          this.ball.isCountdown=false;
+          this.ball.instructions = this.instructions_[1];
+          break;
+
+        case 3:
+          this.ball.type="leave";
+          this.ball.isCountdown=false;
+          this.ball.instructions = this.instructions_[2];
+        break;
+      }
+    },
+    // 黑色提示框
     showToast () {
       this.$toast('show toast show toast show toast show toast show toast show toast show toast ')
     }
@@ -199,136 +199,10 @@ pushBtn()
 
 .count-down-info
   font-size 28px
+  margin-bottom  50px
   color #828282
 
+.homepage
+  margin-top 100px
 
-.homepage .box{
-      width: 56%;
-      height: 100%;
-      /*ackground-color: #f2f2f2;*/  /*球体内部背景色*/
-}
-      
-      
-.homepage .timeboxout{
-      width: 11.5625rem;
-      height: 11.5625rem;
-      box-sizing: border-box;
-      border: 1px solid #2edb75;
-      border-radius: 50%;
-      position: relative;
-      margin-left: auto;margin-right: auto;
-      margin-bottom: 1rem;
-}
-
-.homepage .timeboxmiddle{
-      width: 10.9375rem;height: 10.9375rem;
-      box-sizing: border-box;
-      background: -webkit-linear-gradient(top,#ffffff,#f8cd51);
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;left: 50%;
-      transform: translate(-50%, -50%);
-      overflow: hidden;
-}
-
-.homepage .timeboxin{
-      background-color: #ffffff;
-      width: 10.875rem;height: 10.875rem;
-      box-sizing: border-box;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;left: 50%;
-      transform: translate(-50%, -50%);
-      overflow: hidden;
-}
-     
-
-.homepage .box {
-    height: 10.875rem;
-    width: 10.875rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    border-radius: 100%;
-    overflow: hidden;
-}
-.homepage .box .percent {
-   text-align: center;
-   color: black;
-   margin-top: 2.03125rem;
-   z-index: 3;
-   position: absolute;
-   left: 50%;
-   transform: translateX(-50%);
-   height: 100%;width: 100%;
-}
-/*.homepage p{margin-bottom: 0.5625rem;}*/
-#prompt1{
-      font-size: 1.1875rem;
-}
-#prompt2{
-      font-size: 0.8125rem;
-}
-#prompt3{
-      font-size: 1.125rem;
-}
-.homepage .box .water {
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      -webkit-transform: translate(0, 100%);
-      transform: translate(0, 100%);
-      background: #2edb75;
-}
-
-.homepage .box .water_wave {
-      width: 200%;
-      position: absolute;
-      bottom: 100%;
-}
-.homepage .box .water_wave_back {               /*后面的波纹*/
-      right: 0;
-      fill: #7befaa;
-      -webkit-animation: wave-back 1.4s infinite linear;
-      animation: wave-back 1.4s infinite linear;
-}
-.homepage .box .water_wave_front {              /*前面的波纹*/
-      left: 0;
-      fill: #2edb75;
-      margin-bottom: -1px;
-      -webkit-animation: wave-front .7s infinite linear;
-      animation: wave-front .7s infinite linear;
-}
-
-/*是波浪匀速移动*/
-
-@-webkit-keyframes wave-front {
-      100% {
-            -webkit-transform: translate(-50%, 0);
-            transform: translate(-50%, 0);
-      }
-}
-@keyframes wave-front {
-      100% {
-            -webkit-transform: translate(-50%, 0);
-            transform: translate(-50%, 0);
-      }
-}
-@-webkit-keyframes wave-back {
-      100% {
-            -webkit-transform: translate(50%, 0);
-            transform: translate(50%, 0);
-      }
-}
-@keyframes wave-back {
-      100% {
-            -webkit-transform: translate(50%, 0);
-            transform: translate(50%, 0);
-      }
-}
 </style>

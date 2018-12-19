@@ -77,7 +77,13 @@ export default {
         weekNum: 1
       }).then(res => {
         if (res.data.infoCode) {
-          this.$toast(res.data.infoText)
+          this.$toast(res.data.infoText);
+          
+          // 周报查看失败自动跳转至首页
+          this.$router.push({
+            path: '/'
+          })
+          
         } else {
           this.weeklys = res.data.reports[0]
         }

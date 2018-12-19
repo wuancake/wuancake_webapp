@@ -42,13 +42,14 @@ export default {
           groupid:'',
         },
         groups:[],
+        pageHeight:300
       }
      },
     components:{
       WButton
     },
     mounted() {
-    this.getGriopInfo()
+    this.getGriopInfo();
     },
     methods:{
       //获取所有分组列表
@@ -165,10 +166,12 @@ input[type=radio]
   box-sizing border-box
   font-size 34px
   border 0
+  margin-bottom 60px
 
 .login-btn-item
   border-radius 42px
   &:last-child
     background  $input-primaryLightBLue
     color #ffffff
+
 </style>
