@@ -1,30 +1,30 @@
 {
     "start_url": "/?utm_source=homescreen",
-    "name": "wuancake_webapp",
-    "short_name": "wuancake_webapp",
+    "name": "午安考勤",
+    "short_name": "午安考勤",
     "icons": [
         {
-            "src": "img/icons/android-chrome-512x512.png",
+            "src": "img/icons/android-chrome-512x512.jpg",
             "type": "image/png",
             "sizes": "512x512"
         },
         {
-            "src": "img/icons/android-chrome-192x192.png",
+            "src": "img/icons/android-chrome-192x192.jpg",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "img/icons/apple-touch-icon-180x180.png",
+            "src": "img/icons/apple-touch-icon-180x180.jpg",
             "type": "image/png",
             "sizes": "180x180"
         },
         {
-            "src": "img/icons/apple-touch-icon-152x152.png",
+            "src": "img/icons/apple-touch-icon-152x152.jpg",
             "type": "image/png",
             "sizes": "152x152"
         }
     ],
-    "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#278fef"
+    "display": "fullscreen",
+    "background_color": "#2f94ff",
+    "theme_color": "#2f94ff"
 }

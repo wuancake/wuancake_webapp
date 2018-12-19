@@ -1,4 +1,9 @@
-/**
+
+        importScripts('/static/workbox-v3.6.3/workbox-sw.js');
+        workbox.setConfig({
+            modulePathPrefix: '/static/workbox-v3.6.3/'
+        });
+    /**
  * @file service-worker.js with workbox api
  * @desc [example](https://workbox-samples.glitch.me/examples/workbox-sw/)
  * @author tim760255458(760255458@qq.com)
@@ -47,3 +52,4 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 // Define runtime cache.
 workbox.routing.registerRoute(/^https:\/\/13\.125\.249\.52:8008\//,
     workbox.strategies.networkFirst());
+workbox.routing.registerNavigationRoute('/index.html');
