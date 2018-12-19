@@ -1,11 +1,11 @@
 <template>
   <div>
-    <button @click="goSignUp">注册</button>
+    <!-- <button @click="goSignUp">注册</button>
     <button @click="goLogin">登录</button>
     <button @click="goGrouping">分组</button>
     <button @click="goMyAccount">我的账号</button>
     <button @click="goChnagePassword">修改密码</button>
-    <button @click="showToast">show toast</button>
+    <button @click="showToast">show toast</button> -->
 
     <w-ball 
       :type="ball.type" 
@@ -140,7 +140,7 @@ export default {
           this.$toast(res.data.infoText);
         } else {
           // 成功返回状态码：1表示未提交，2表示已提交，3表示已请假 
-          this.setUserInfo({ status: res.data.status });
+          this.setUserInfo({ status: res.data.status, currWeek: res.data.weekNum });
           this.typeJudge(res.data.status);
         }
       })
